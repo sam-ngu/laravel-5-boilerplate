@@ -1,6 +1,10 @@
 // Here you can add other styles
 @import '~simple-line-icons/scss/simple-line-icons';
 
+@import "~material-design-icons-iconfont/dist/material-design-icons.css";
+
+@import "~vuetify/dist/vuetify.min.css";
+
 // Fix mobile footer
 .app-footer {
     flex: 0 0;

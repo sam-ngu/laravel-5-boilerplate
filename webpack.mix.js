@@ -37,3 +37,33 @@ mix.sass('resources/sass/frontend/app.scss', 'css/frontend.css')
 if (mix.inProduction() || process.env.npm_lifecycle_event !== 'hot') {
     mix.version();
 }
+
+mix.options({
+    hmrOptions: {
+        host: 'template.sammygee.nobillygee',
+    }
+});
+
+// // fix css files 404 issue
+mix.webpackConfig({
+    devServer: {
+        proxy: {
+            '/route':{
+                target: 'https://template.local',
+            },
+            '/api':{
+                target: 'https://template.local:443',
+                ws: true,
+                changeOrigin: true,
+
+            }
+        },
+        watchOptions:{
+            aggregateTimeout:200,
+            poll:5000
+        },
+        // plugins: [
+        //     new webpack.EnvironmentPlugin(['MIX_PUBLISH_APP_URL']),
+        // ],
+    }
+});
