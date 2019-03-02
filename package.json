@@ -5,7 +5,7 @@
     "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "npm run development -- --watch",
     "watch-poll": "npm run watch -- --watch-poll",
-    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --https --key /etc/ssl/private/default.key --cert /etc/ssl/private/default.crt --config=node_modules/laravel-mix/setup/webpack.config.js",
     "prod": "npm run production",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "test": "cross-env NODE_ENV=test jest",
@@ -17,12 +17,11 @@
     "@fortawesome/free-brands-svg-icons": "^5.2.0",
     "@fortawesome/free-regular-svg-icons": "^5.2.0",
     "@fortawesome/free-solid-svg-icons": "^5.2.0",
-    "@vue/test-utils": "^1.0.0-beta.10",
+    "@vue/test-utils": "^1.0.0-beta.29",
     "axios": "^0.18",
-    "babel-jest": "^22.1.0",
     "bootstrap": "^4.0.0",
     "cross-env": "^5.1",
-    "jest": "^22.1.4",
+    "jest": "^24.1.0",
     "jest-vue-preprocessor": "^1.3.1",
     "jquery": "^3.2",
     "laravel-mix": "^4.0.7",
@@ -53,12 +52,32 @@
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
       ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor"
-    }
+    },
+    "collectCoverage": false,
+    "collectCoverageFrom": [
+      "**/*.{js,vue}",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "html",
+      "text-summary"
+    ]
   },
   "dependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "@babel/plugin-transform-runtime": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^24.1.0",
+    "babel-loader": "^8.0.5",
+    "babel-preset-env": "^1.7.0",
     "material-design-icons-iconfont": "^4.0.4",
-    "vue-loader": "^15.6.2",
+    "vue-jest": "^3.0.3",
+    "vue-loader": "^15.7.0",
     "vue-router": "^3.0.2",
+    "vue-template-es2015-compiler": "1.6.*",
     "vuetify": "^1.5.0"
   }
 }

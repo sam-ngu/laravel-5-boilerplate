@@ -1,11 +1,11 @@
-import {shallow} from '@vue/test-utils';
+import {shallowMount} from '@vue/test-utils';
 import Example from '../../resources/js/frontend/components/ExampleComponent.vue';
 
 describe('Example', () => {
     let wrapper;
 
     beforeEach(() => {
-        wrapper = shallow(Example);
+        wrapper = shallowMount(Example);
     });
 
     it('should say it is an example component', function () {

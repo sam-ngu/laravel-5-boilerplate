@@ -1,23 +1,34 @@
 import VueRouter from 'vue-router'
 
+import BaseDashboard from '../../backend/components/dashboard/BaseDashboard'
+
+import {user} from '../routes/auth/user'
+import {role} from '../routes/auth/role'
+
+
+let routes = [
+    {
+        path: '/',
+        component: BaseDashboard,
+        name: 'home',
+    },
+
+].concat(user, role);  // add more route groups here
+
 
 const router = new VueRouter({
-    routes: [
-        {
-            path: '/',
-            component: DashboardContainer,
-            name: 'home',
-
-        },
-
-        // {
-        //     path: '/backtest/:backtest_id',
-        //     name: 'backtest-details',
-        //     component: BacktestDetails,
-        //     // props: true,
-        // }
-
-    ],
+    routes: routes,
+    //     [
+    //
+    //
+    //     // {
+    //     //     path: '/backtest/:backtest_id',
+    //     //     name: 'backtest-details',
+    //     //     component: BacktestDetails,
+    //     //     // props: true,
+    //     // }
+    //
+    // ],
 });
 
 router.beforeEach(function(to, from, next){

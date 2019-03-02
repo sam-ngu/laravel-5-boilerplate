@@ -16,7 +16,7 @@
                 <v-list-tile-action>
                     <v-icon>home</v-icon>
                 </v-list-tile-action>
-                <v-list-tile-title>Home</v-list-tile-title>
+                <v-list-tile-title>Dashboard</v-list-tile-title>
             </v-list-tile>
 
             <v-list-tile to="/backtest">
@@ -47,17 +47,18 @@
                         value="true"
                 >
                     <v-list-tile slot="activator">
-                        <v-list-tile-title>Admin</v-list-tile-title>
+                        <v-list-tile-title>Access</v-list-tile-title>
                     </v-list-tile>
 
                     <v-list-tile
                             v-for="(admin, i) in admins"
                             :key="i"
                             @click=""
+                            :to="admin.to"
                     >
-                        <v-list-tile-title v-text="admin[0]"></v-list-tile-title>
-                        <v-list-tile-action>
-                            <v-icon v-text="admin[1]"></v-icon>
+                        <v-list-tile-title v-text="admin.name"></v-list-tile-title>
+                        <v-list-tile-action >
+                            <v-icon v-text="admin.icon"></v-icon>
                         </v-list-tile-action>
                     </v-list-tile>
                 </v-list-group>
@@ -95,8 +96,18 @@
         data() {
             return {
                 admins: [
-                    ['Management', 'people_outline'],
-                    ['Settings', 'settings']
+                    {
+                        name: "User Management",
+                        icon: "people_outline",
+                        to: {name: 'user-management'}
+
+                    },
+                    {
+                        name: "Role Management",
+                        icon: "settings",
+                        to: {name: 'role-management'}
+
+                    },
                 ],
                 cruds: [
                     ['Create', 'add'],

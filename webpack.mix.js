@@ -40,19 +40,27 @@ if (mix.inProduction() || process.env.npm_lifecycle_event !== 'hot') {
 
 mix.options({
     hmrOptions: {
-        host: 'template.sammygee.nobillygee',
+        host: 'laravel-boilerplate.dev.local',
     }
 });
 
 // // fix css files 404 issue
 mix.webpackConfig({
     devServer: {
+
+        // https: {
+        //     key: '/etc/ssl/private/default.key',
+        //     cert: '/etc/ssl/private/default.crt',
+        //     ca: '/etc/ssl/private/dhparam.pem',
+        // },
         proxy: {
+            host: '0.0.0.0',
+            port: 8080,
             '/route':{
-                target: 'https://template.local',
+                target: 'https://laravel-boilerplate.dev.local',
             },
             '/api':{
-                target: 'https://template.local:443',
+                target: 'https://laravel-boilerplate.dev.local:443',
                 ws: true,
                 changeOrigin: true,
 

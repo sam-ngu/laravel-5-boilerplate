@@ -5,9 +5,9 @@
             dense
             fixed
             color="red darken-4">
-        <v-toolbar-side-icon></v-toolbar-side-icon>
+        <v-toolbar-side-icon @click="toggleSideBar"></v-toolbar-side-icon>
 
-        <v-toolbar-title > <router-link class="white--text" style="text-decoration: none;" :to="{name: 'home'}">ResQ IT</router-link></v-toolbar-title>
+        <v-toolbar-title > <router-link class="white--text" style="text-decoration: none;" :to="{name: 'home'}">Boilerplate</router-link></v-toolbar-title>
 
         <v-spacer></v-spacer>
 
@@ -73,6 +73,9 @@
                 this.dark = !this.dark;
                 EventBus.$emit('toggled-dark')
 
+            },
+            toggleSideBar(){
+                EventBus.$emit('toggled-sidebar')
             },
             logout(){
                 window.location.href = '/logout';

@@ -23,8 +23,10 @@
         computed: {
             showSidebar(){
                 // if is in control then show
-                // if(this.$router.full)
-                return true;
+                if(this.$router.full)
+                    return true;
+                else
+                    return false;
             }
         },
         methods: {

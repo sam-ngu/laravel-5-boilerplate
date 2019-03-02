@@ -5,6 +5,7 @@
         </div>
         <div class="card-body">
             I'm an example Vue component!
+
         </div>
     </div>
 </template>
