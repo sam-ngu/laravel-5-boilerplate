@@ -20,7 +20,7 @@ class UserTableSeeder extends Seeder
         $this->disableForeignKeys();
 
         // Add the master administrator, user id of 1
-        User::create([
+        $admin = User::create([
             'first_name'        => 'Admin',
             'last_name'         => 'Istrator',
             'email'             => 'admin@admin.com',
@@ -48,5 +48,6 @@ class UserTableSeeder extends Seeder
         ]);
 
         $this->enableForeignKeys();
+
     }
 }

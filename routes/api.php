@@ -16,3 +16,17 @@ use Illuminate\Http\Request;
 /*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });*/
+
+Route::group([
+    'namespace' => 'Api',
+    'as' => 'api.',
+    'middleware' => [
+        'auth:api',
+        \App\Http\Middleware\ParseFormData::class
+    ]
+], function (){
+    /**
+     * All route names are prefixed with 'api.'.
+     */
+    include_route_files(__DIR__ . '/api/');
+});

@@ -54076,4 +54076,4 @@ module.exports = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */"./
 
 /***/ })
 
-},[[2,"/js/manifest"]]]);
+}]);

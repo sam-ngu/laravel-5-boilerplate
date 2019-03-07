@@ -1,6 +1,7 @@
 <template>
     <v-app :dark="dark">
         <layout-master :disable-sidebar="showSidebar">
+            <v-breadcrumbs :items="breadcrumbItems" divider=">"></v-breadcrumbs>
             <router-view></router-view>
         </layout-master>
     </v-app>
@@ -18,6 +19,7 @@
         data(){
             return{
                 dark: false,
+                breadcrumbItems : this.$route.meta.breadcrumb,
             }
         },
         computed: {
@@ -27,6 +29,11 @@
                     return true;
                 else
                     return false;
+            }
+        },
+        watch: {
+            '$route'(){
+                this.breadcrumbItems = this.$route.meta.breadcrumb
             }
         },
         methods: {

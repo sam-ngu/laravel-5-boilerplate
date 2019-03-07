@@ -1,5 +1,9 @@
 <template>
-    <user-management-table></user-management-table>
+    <v-container>
+        <user-management-table></user-management-table>
+        <router-view></router-view>
+
+    </v-container>
 </template>
 
 <script>
