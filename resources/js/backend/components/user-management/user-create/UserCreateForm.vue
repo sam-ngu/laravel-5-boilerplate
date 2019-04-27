@@ -1,0 +1,202 @@
+<template>
+    <v-container>
+
+        <v-card class="pa-5 elevation-2">
+
+            <v-form ref="form" v-model="states.is_form_valid" @submit.prevent="submitForm">
+                <v-text-field
+                    label="First Name"
+                    v-model="inputData.first_name"
+                    :rules="rules.name"
+                >
+                </v-text-field>
+
+                <v-text-field
+                    label="Last Name"
+                    v-model="inputData.last_name"
+                    :rules="rules.name"
+                >
+                </v-text-field>
+
+                <v-text-field
+                    label="Email Address"
+                    type="email"
+                    v-model="inputData.email"
+                    :rules="rules.email"
+                >
+                </v-text-field>
+
+                <v-text-field
+                    label="Password"
+                    type="password"
+                    v-model="inputData.password"
+                    :rules="rules.password"
+                >
+                </v-text-field>
+
+                <v-text-field
+                    label="Password Again"
+                    type="password"
+                    :rules="rules.password_again"
+                >
+                </v-text-field>
+
+                <v-container>
+                    <v-subheader>Roles</v-subheader>
+                    <v-layout row>
+                        <v-flex xs12 md6>
+                            <v-card>
+                                <v-switch label="Administrator" v-model="inputData.roles.administrator"></v-switch>
+                                <v-card-text>
+                                    All Permissions
+                                </v-card-text>
+
+                            </v-card>
+                        </v-flex>
+                        <v-flex xs12 md6>
+                            <v-card>
+                                <v-switch label="Executive" v-model="inputData.roles.executive"></v-switch>
+                                <v-card-text>
+                                    View-backend
+                                </v-card-text>
+                            </v-card>
+                        </v-flex>
+                        <v-flex xs12 md6>
+                            <v-card>
+                                <v-switch label="User" v-model="inputData.roles.user"></v-switch>
+                                <v-card-text>
+                                    None
+                                </v-card-text>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+
+                <!--permission-->
+
+                <v-container>
+                    <v-subheader>Permissions</v-subheader>
+                    <v-layout row>
+                        <v-flex xs12 md6>
+                            <v-card>
+                                <v-switch label="View Backend" v-model="inputData.permissions.view_backend"></v-switch>
+                                <v-card-text>
+                                    None
+                                </v-card-text>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+
+
+            </v-form>
+
+            <div>
+                <v-btn label="submit" color="primary" block :disabled="!states.is_form_valid" @click="submitForm">Submit</v-btn>
+            </div>
+
+        </v-card>
+
+
+    </v-container>
+</template>
+
+<script>
+    import SwalMixin from "../../../../mixins/SwalMixin";
+    import {EventBus} from "../../../../vue-tools/event-bus";
+
+    export default {
+        name: "UserCreateForm",
+        mixins: [SwalMixin],
+        data() {
+            return {
+                states: {
+                    is_form_valid: false
+                },
+                inputData: {
+                    first_name: null,
+                    last_name: null,
+                    email: null,
+                    password: null,
+                    active: true,
+                    confirmed: true,
+                    confirmation_email: true,
+                    roles: {
+                        administrator: false,
+                        executive: false,
+                        user: false,
+                    },
+                    permissions: {
+                        view_backend: false,
+                    }
+                },
+                rules: {
+                    name: [
+                        v => !!v || 'Name is required',
+                        v => (v && v.length <= 30) || 'Name must be less than 30 characters'
+                    ],
+                    password: [
+                        v => !!v || "Required",
+                        v => (v && v.length >= 8) || "Password must be at least 8 characters"
+                    ],
+                    password_again: [
+                        v => this.inputData.password ? ((v && v === this.inputData.password) || "Passwords do not match!") : true,
+                    ],
+                    email: [
+                        v => !!v || 'Required',
+                        v => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'Incorrect format',  // 99% email regex
+                    ],
+
+                }
+
+            }
+        },
+        props: {
+
+        },
+        computed: {},
+        methods: {
+            submitForm(){
+                if(!this.$refs.form.validate()){
+                    this.swalMessage("error", "Please complete the form");
+                    return
+                }
+
+                // reformatting input data for compatibility with default backend api
+                this.inputData.roles = _.filter(_.map(this.inputData.roles, function (value, key) {
+                    return value ? key : null
+                }));
+
+                this.inputData.permissions = _.filter(_.map(this.inputData.permissions, function (value, key) {
+                    return value ? key.replace(/[_]/g, " ") : null
+                }));
+                this.inputData.active = Number(this.inputData.active);
+                this.inputData.confirmed = Number(this.inputData.confirmed);
+                this.inputData.confirmation_email = Number(this.inputData.confirmation_email);
+
+                let uri = "/api/v1/user";
+
+                axios.post(uri, this.inputData)
+                    .then(function(response){
+                        this.swalTimer("success");
+                        this.$emit("user-created");
+                        EventBus.$emit("table-reload-required")
+                    }.bind(this))
+                    .catch(function (response) {
+                        let errors = response.response.data.error;
+                        if ((typeof errors) === "string")
+                            errors = {errors};
+                        this.swalMessage("error", errors)
+                    })
+            }
+
+        },
+        mounted() {
+
+        },
+    }
+</script>
+
+<style scoped>
+
+</style>

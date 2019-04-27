@@ -19,6 +19,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -28,13 +29,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      dark: false
+      dark: false,
+      breadcrumbItems: this.$route.meta.breadcrumb
     };
   },
   computed: {
     showSidebar: function showSidebar() {
       // if is in control then show
       if (this.$router.full) return true;else return false;
+    }
+  },
+  watch: {
+    '$route': function $route() {
+      this.breadcrumbItems = this.$route.meta.breadcrumb;
     }
   },
   methods: {
@@ -381,6 +388,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "BaseUserManagement",
@@ -398,6 +409,176 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/backend/components/user-management/UserManagementShow.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/backend/components/user-management/BaseUserUpdate.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vue_tools_CollapsibleSidebar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../vue-tools/CollapsibleSidebar */ "./resources/js/vue-tools/CollapsibleSidebar.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "UserManagementShow",
+  components: {
+    CollapsibleSidebar: _vue_tools_CollapsibleSidebar__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    var _this = this;
+
+    return {
+      show: false,
+      formsValidity: {
+        //validity of all forms, depending on rules
+        formEditDetails: false
+      },
+      rules: {
+        email: [function (v) {
+          return _this.inputData.email ? v && /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || "Incorrect Format" : true;
+        }],
+        name: [function (v) {
+          return !!v || 'Name is required';
+        }, function (v) {
+          return v && v.length <= 30 || 'Name must be less than 30 characters';
+        }],
+        password: [],
+        password_again: [function (v) {
+          return _this.inputData.email_password ? v && v === _this.inputData.email_password || "Passwords do not match!" : true;
+        }]
+      },
+      inputData: this.data
+    };
+  },
+  props: {
+    data: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {},
+  methods: {
+    back: function back() {
+      this.$router.push({
+        name: 'user-management'
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.show = true; // trigger fade effect
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/backend/components/user-management/UserManagementTable.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/backend/components/user-management/UserManagementTable.vue?vue&type=script&lang=js& ***!
@@ -407,6 +588,27 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -540,8 +742,7 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Actions',
         value: 'action',
         sortable: false
-      }],
-      tableRows: []
+      }]
     };
   },
   props: {},
@@ -577,6 +778,82 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "collapsible-sidebar",
+  data: function data() {
+    return {
+      showSidebarMutable: false
+    };
+  },
+  props: {
+    showSidebar: {
+      type: Boolean,
+      required: true
+    }
+  },
+  computed: {
+    showSidebarComputed: {
+      get: function get() {
+        this.showSidebarMutable = this.showSidebar;
+        return this.showSidebarMutable;
+      },
+      set: function set(value) {
+        this.showSidebarMutable = value;
+      }
+    }
+  },
+  methods: {
+    dismiss: function dismiss() {
+      this.showSidebarMutable = false;
+      this.$emit('dismiss-sidebar');
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/backend/components/App.vue?vue&type=style&index=0&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--7-1!./node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/backend/components/App.vue?vue&type=style&index=0&lang=css& ***!
@@ -589,7 +866,26 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*#app {*/\n    /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/\n    /*-webkit-font-smoothing: antialiased;*/\n    /*-moz-osx-font-smoothing: grayscale;*/\n    /*text-align: center;*/\n    /*color: #2c3e50;*/\n    /*margin-top: 60px;*/\n/*}*/\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*#app {*/\n    /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/\n    /*-webkit-font-smoothing: antialiased;*/\n    /*-moz-osx-font-smoothing: grayscale;*/\n    /*text-align: center;*/\n    /*color: #2c3e50;*/\n    /*margin-top: 60px;*/\n/*}*/\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=style&index=0&id=54efec2b&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--7-1!./node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=style&index=0&id=54efec2b&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700);", ""]);
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    /*\n    DEMO STYLE\n*/\nbody[data-v-54efec2b] {\n        font-family: 'Poppins', sans-serif;\n        background: #FFFFFF;\n}\np[data-v-54efec2b] {\n        font-family: 'Poppins', sans-serif;\n        font-size: 1.1em;\n        font-weight: 300;\n        line-height: 1.7em;\n        color: #999;\n}\na[data-v-54efec2b], a[data-v-54efec2b]:hover, a[data-v-54efec2b]:focus {\n        color: inherit;\n        text-decoration: none;\n        transition: all 0.3s;\n}\n.navbar[data-v-54efec2b] {\n        padding: 15px 10px;\n        background: #fff;\n        border: none;\n        border-radius: 0;\n        margin-bottom: 40px;\n        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);\n}\n.navbar-btn[data-v-54efec2b] {\n        box-shadow: none;\n        outline: none !important;\n        border: none;\n}\n.line[data-v-54efec2b] {\n        width: 100%;\n        height: 1px;\n        border-bottom: 1px dashed #686868;\n        margin: 40px 0;\n}\n.fade-enter-active[data-v-54efec2b], .fade-leave-active[data-v-54efec2b] {\n        transition: opacity .5s;\n}\n.fade-enter[data-v-54efec2b], .fade-leave-to[data-v-54efec2b] /* .fade-leave-active below version 2.1.8 */ {\n        opacity: 0;\n}\n.wrapper[data-v-54efec2b]{\n        display: block;\n}\n\n    /* ---------------------------------------------------\n        SIDEBAR STYLE\n    ----------------------------------------------------- */\n#sidebar[data-v-54efec2b] {\n        width: 80%;\n        position: fixed;\n        top: 0;\n        right: -100%;\n        height: 100vh;\n        z-index: 1050;\n        background: #e3e4e5;\n        color: #383838;\n        transition: all 0.3s;\n        overflow-y: scroll;\n        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);\n}\n#sidebar.active[data-v-54efec2b] {\n        right: 0;\n}\n#dismiss[data-v-54efec2b] {\n        width: 35px;\n        height: 35px;\n        line-height: 35px;\n        text-align: center;\n        position: absolute;\n        top: 10px;\n        right: 10px;\n        cursor: pointer;\n        transition: all 0.3s;\n}\n#dismiss[data-v-54efec2b]:hover {\n        background: #fff;\n        color: #a6a6a6;\n}\n#dismiss .fa-times-circle[data-v-54efec2b] {\n        width: 35px;\n        height: 35px;\n        color: #000;\n}\n.overlay[data-v-54efec2b] {\n        position: fixed;\n        top: 0;\n        left: 0;\n        width: 100vw;\n        height: 100vh;\n        background: rgba(0, 0, 0, 0.5);\n        z-index: 1049;\n        /*display: none;*/\n}\n#sidebar .sidebar-header[data-v-54efec2b] {\n        padding: 20px;\n        background: #a6a7a8;\n}\n#sidebar ul.components[data-v-54efec2b] {\n        padding: 20px 0;\n        border-bottom: 1px solid #47748b;\n}\n#sidebar ul p[data-v-54efec2b] {\n        color: #030303;\n        padding: 10px;\n}\n#sidebar ul li a[data-v-54efec2b] {\n        padding: 10px;\n        font-size: 1.1em;\n        display: block;\n}\n#sidebar ul li a[data-v-54efec2b]:hover {\n        color: #9bc2d1;\n        background: #FFFFFF;\n}\n#sidebar ul li.active > a[data-v-54efec2b], a[aria-expanded=\"true\"][data-v-54efec2b] {\n        color: #afd8ff;\n        background: #ffffff;\n}\na[data-toggle=\"collapse\"][data-v-54efec2b] {\n        position: relative;\n}\na[aria-expanded=\"false\"][data-v-54efec2b]::before, a[aria-expanded=\"true\"][data-v-54efec2b]::before {\n        content: '\\E259';\n        display: block;\n        position: absolute;\n        right: 20px;\n        font-family: 'Glyphicons Halflings';\n        font-size: 0.6em;\n}\na[aria-expanded=\"true\"][data-v-54efec2b]::before {\n        content: '\\E260';\n}\nul ul a[data-v-54efec2b] {\n        font-size: 0.9em !important;\n        padding-left: 30px !important;\n        background: #6d7fcc;\n}\nul.CTAs[data-v-54efec2b] {\n        padding: 20px;\n}\nul.CTAs a[data-v-54efec2b] {\n        text-align: center;\n        font-size: 0.9em !important;\n        display: block;\n        border-radius: 5px;\n        margin-bottom: 5px;\n}\na.download[data-v-54efec2b] {\n        background: #fff;\n        color: #7386D5;\n}\na.article[data-v-54efec2b], a.article[data-v-54efec2b]:hover {\n        background: #6d7fcc !important;\n        color: #fff !important;\n}\n\n\n    /* ---------------------------------------------------\n        CONTENT STYLE\n    ----------------------------------------------------- */\n#content[data-v-54efec2b] {\n        width: 100%;\n        padding: 20px;\n        min-height: 100vh;\n        transition: all 0.3s;\n        position: absolute;\n        top: 0;\n        right: 0;\n}\n\n\n", ""]);
 
 // exports
 
@@ -737,7 +1033,13 @@ var render = function() {
       _c(
         "layout-master",
         { attrs: { "disable-sidebar": _vm.showSidebar } },
-        [_c("router-view")],
+        [
+          _c("v-breadcrumbs", {
+            attrs: { items: _vm.breadcrumbItems, divider: ">" }
+          }),
+          _vm._v(" "),
+          _c("router-view")
+        ],
         1
       )
     ],
@@ -1133,7 +1435,351 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("user-management-table")
+  return _c(
+    "v-container",
+    [_c("user-management-table"), _vm._v(" "), _c("router-view")],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/backend/components/user-management/UserManagementShow.vue?vue&type=template&id=56b98dc5&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/backend/components/user-management/BaseUserUpdate.vue?vue&type=template&id=56b98dc5&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "collapsible-sidebar",
+    {
+      attrs: { "show-sidebar": _vm.show },
+      on: { "dismiss-sidebar": _vm.back }
+    },
+    [
+      _c("template", { slot: "header" }, [
+        _vm._v(
+          "\n        " +
+            _vm._s(_vm.data.first_name) +
+            " " +
+            _vm._s(_vm.data.last_name) +
+            "\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "template",
+        { slot: "content" },
+        [
+          _c(
+            "v-container",
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "" } },
+                    [
+                      _c(
+                        "v-card",
+                        { staticClass: "mb-5 pa-5" },
+                        [
+                          _c(
+                            "v-form",
+                            {
+                              ref: "formEditDetails",
+                              on: {
+                                submit: function($event) {
+                                  $event.preventDefault()
+                                }
+                              },
+                              model: {
+                                value: _vm.formsValidity.formEditDetails,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    _vm.formsValidity,
+                                    "formEditDetails",
+                                    $$v
+                                  )
+                                },
+                                expression: "formsValidity.formEditDetails"
+                              }
+                            },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "First Name",
+                                  rules: _vm.rules.name
+                                },
+                                model: {
+                                  value: _vm.inputData.first_name,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.inputData, "first_name", $$v)
+                                  },
+                                  expression: "inputData.first_name"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Last Name",
+                                  rules: _vm.rules.name
+                                },
+                                model: {
+                                  value: _vm.inputData.last_name,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.inputData, "last_name", $$v)
+                                  },
+                                  expression: "inputData.last_name"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Email",
+                                  rules: _vm.rules.name
+                                },
+                                model: {
+                                  value: _vm.inputData.email,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.inputData, "email", $$v)
+                                  },
+                                  expression: "inputData.email"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Change password",
+                                  type: "password",
+                                  rules: _vm.rules.password
+                                },
+                                model: {
+                                  value: _vm.inputData.password,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.inputData, "password", $$v)
+                                  },
+                                  expression: "inputData.password"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Password confirmation",
+                                  rules: _vm.rules.password_again,
+                                  type: "password"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "v-container",
+                                [
+                                  _c("v-subheader", [_vm._v("Roles")]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-layout",
+                                    { attrs: { row: "" } },
+                                    [
+                                      _c(
+                                        "v-flex",
+                                        { attrs: { xs12: "", md6: "" } },
+                                        [
+                                          _c(
+                                            "v-card",
+                                            [
+                                              _c("v-switch", {
+                                                attrs: {
+                                                  label: "Administrator"
+                                                },
+                                                model: {
+                                                  value: _vm.inputData.is_admin,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.inputData,
+                                                      "is_admin",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "inputData.is_admin"
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("v-card-text", [
+                                                _vm._v(
+                                                  "\n                                                All Permissions\n                                            "
+                                                )
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        { attrs: { xs12: "", md6: "" } },
+                                        [
+                                          _c(
+                                            "v-card",
+                                            [
+                                              _c("v-switch", {
+                                                attrs: { label: "Executive" },
+                                                model: {
+                                                  value:
+                                                    _vm.inputData.is_executive,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.inputData,
+                                                      "is_executive",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "inputData.is_executive"
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("v-card-text", [
+                                                _vm._v(
+                                                  "\n                                                View-backend\n                                            "
+                                                )
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        { attrs: { xs12: "", md6: "" } },
+                                        [
+                                          _c(
+                                            "v-card",
+                                            [
+                                              _c("v-switch", {
+                                                attrs: { label: "User" },
+                                                model: {
+                                                  value: _vm.inputData.is_user,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.inputData,
+                                                      "is_user",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "inputData.is_user"
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("v-card-text", [
+                                                _vm._v(
+                                                  "\n                                                None\n                                            "
+                                                )
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-container",
+                                [
+                                  _c("v-subheader", [_vm._v("Permissions")]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-layout",
+                                    { attrs: { row: "" } },
+                                    [
+                                      _c(
+                                        "v-flex",
+                                        { attrs: { xs12: "", md6: "" } },
+                                        [
+                                          _c(
+                                            "v-card",
+                                            [
+                                              _c("v-switch", {
+                                                attrs: { label: "View Backed" },
+                                                model: {
+                                                  value:
+                                                    _vm.inputData.view_backend,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.inputData,
+                                                      "view_backend",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "inputData.view_backend"
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("v-card-text", [
+                                                _vm._v(
+                                                  "\n                                                None\n                                            "
+                                                )
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -1158,7 +1804,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-container",
     [
       _c(
         "v-toolbar",
@@ -1176,81 +1822,208 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "v-data-table",
-        {
-          staticClass: "elevation-1",
-          attrs: {
-            headers: _vm.headers,
-            items: _vm.desserts,
-            loading: _vm.states.isLoading
+      _c("v-data-table", {
+        staticClass: "elevation-1",
+        attrs: {
+          headers: _vm.headers,
+          items: _vm.data.users,
+          loading: _vm.states.isLoading
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "items",
+            fn: function(props) {
+              return [
+                _c("tr", [
+                  _c(
+                    "td",
+                    { staticClass: "text-xs-left" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          attrs: {
+                            to: {
+                              name: "show",
+                              params: {
+                                id: props.item.id,
+                                data: props.item,
+                                show: true
+                              }
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.item.last_name) +
+                              "\n                    "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-xs-left" }, [
+                    _vm._v(_vm._s(props.item.first_name))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-xs-left" }, [
+                    _vm._v(_vm._s(props.item.email))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "text-xs-right" },
+                    [
+                      _c(
+                        "v-chip",
+                        {
+                          attrs: {
+                            "text-color": "white",
+                            color: props.item.confirmed_label ? "green" : "red"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(
+                                props.item.confirmed_label ? "Yes" : "No"
+                              ) +
+                              "\n                    "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-xs-left" }, [
+                    _vm._v(_vm._s(props.item.roles_label))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-xs-right" }, [
+                    _vm._v(_vm._s(props.item.permissions_label))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-xs-right" }, [
+                    _vm._v(_vm._s(props.item.social_buttons))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-xs-right" }, [
+                    _vm._v(_vm._s(props.item.updated_at))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "justify-center layout px-0" },
+                    [
+                      _c(
+                        "v-icon",
+                        {
+                          staticClass: "mr-2",
+                          attrs: { small: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.editItem(props.item)
+                            }
+                          }
+                        },
+                        [_vm._v("\n                    edit\n                ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-icon",
+                        {
+                          attrs: { small: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.deleteItem(props.item)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    delete\n                "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ]
+            }
           }
+        ])
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=template&id=54efec2b&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=template&id=54efec2b&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "wrapper" },
+    [
+      _c(
+        "nav",
+        {
+          class: { active: _vm.showSidebarComputed },
+          attrs: { id: "sidebar" }
         },
         [
-          [
-            _c("td", [_vm._v(_vm._s(_vm.props.item.name))]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-xs-right" }, [
-              _vm._v(_vm._s(_vm.props.item.calories))
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-xs-right" }, [
-              _vm._v(_vm._s(_vm.props.item.fat))
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-xs-right" }, [
-              _vm._v(_vm._s(_vm.props.item.carbs))
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-xs-right" }, [
-              _vm._v(_vm._s(_vm.props.item.protein))
-            ]),
-            _vm._v(" "),
-            _c(
-              "td",
-              { staticClass: "justify-center layout px-0" },
-              [
-                _c(
-                  "v-icon",
-                  {
-                    staticClass: "mr-2",
-                    attrs: { small: "" },
-                    on: {
-                      click: function($event) {
-                        _vm.editItem(_vm.props.item)
-                      }
-                    }
-                  },
-                  [_vm._v("\n                    edit\n                ")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "v-icon",
-                  {
-                    attrs: { small: "" },
-                    on: {
-                      click: function($event) {
-                        _vm.deleteItem(_vm.props.item)
-                      }
-                    }
-                  },
-                  [_vm._v("\n                    delete\n                ")]
-                )
-              ],
-              1
-            )
-          ],
+          _c("div", { attrs: { id: "dismiss" }, on: { click: _vm.dismiss } }, [
+            _c("i", { staticClass: "far fa-times-circle" })
+          ]),
           _vm._v(" "),
-          [
+          _c("div", { staticClass: "sidebar-header" }, [
             _c(
-              "v-btn",
-              { attrs: { color: "primary" }, on: { click: _vm.initialize } },
-              [_vm._v("Reset")]
+              "h3",
+              { staticStyle: { color: "#1e3eb9" } },
+              [_vm._t("header")],
+              2
             )
-          ]
-        ],
-        2
-      )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "sidebar-content" }, [_vm._t("content")], 2)
+        ]
+      ),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "fade" } }, [
+        _vm.showSidebarComputed
+          ? _c("div", {
+              staticClass: "overlay",
+              on: {
+                click: function() {
+                  _vm.dismiss()
+                }
+              }
+            })
+          : _vm._e()
+      ])
     ],
     1
   )
@@ -5205,6 +5978,36 @@ options.transform = transform
 options.insertInto = undefined;
 
 var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=style&index=0&id=54efec2b&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=style&index=0&id=54efec2b&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--7-1!../../../node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/vue-loader/lib??vue-loader-options!./CollapsibleSidebar.vue?vue&type=style&index=0&id=54efec2b&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=style&index=0&id=54efec2b&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -45977,6 +46780,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/backend/components/user-management/UserManagementShow.vue":
+/*!********************************************************************************!*\
+  !*** ./resources/js/backend/components/user-management/BaseUserUpdate.vue ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _UserManagementShow_vue_vue_type_template_id_56b98dc5_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseUserUpdate.vue?vue&type=template&id=56b98dc5&scoped=true& */ "./resources/js/backend/components/user-management/BaseUserUpdate.vue?vue&type=template&id=56b98dc5&scoped=true&");
+/* harmony import */ var _UserManagementShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BaseUserUpdate.vue?vue&type=script&lang=js& */ "./resources/js/backend/components/user-management/BaseUserUpdate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UserManagementShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UserManagementShow_vue_vue_type_template_id_56b98dc5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UserManagementShow_vue_vue_type_template_id_56b98dc5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "56b98dc5",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/backend/components/user-management/BaseUserUpdate.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/backend/components/user-management/UserManagementShow.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/backend/components/user-management/BaseUserUpdate.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserManagementShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./BaseUserUpdate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/backend/components/user-management/BaseUserUpdate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserManagementShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/backend/components/user-management/UserManagementShow.vue?vue&type=template&id=56b98dc5&scoped=true&":
+/*!***************************************************************************************************************************!*\
+  !*** ./resources/js/backend/components/user-management/BaseUserUpdate.vue?vue&type=template&id=56b98dc5&scoped=true& ***!
+  \***************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_laravel_mix_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserManagementShow_vue_vue_type_template_id_56b98dc5_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./BaseUserUpdate.vue?vue&type=template&id=56b98dc5&scoped=true& */ "./node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/backend/components/user-management/BaseUserUpdate.vue?vue&type=template&id=56b98dc5&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_laravel_mix_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserManagementShow_vue_vue_type_template_id_56b98dc5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_laravel_mix_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserManagementShow_vue_vue_type_template_id_56b98dc5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/backend/components/user-management/UserManagementTable.vue":
 /*!*********************************************************************************!*\
   !*** ./resources/js/backend/components/user-management/UserManagementTable.vue ***!
@@ -46078,11 +46950,34 @@ var role = [{
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "user", function() { return user; });
 /* harmony import */ var _backend_components_user_management_BaseUserManagement__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../backend/components/user-management/BaseUserManagement */ "./resources/js/backend/components/user-management/BaseUserManagement.vue");
+/* harmony import */ var _backend_components_user_management_UserManagementShow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../backend/components/user-management/UserManagementShow */ "./resources/js/backend/components/user-management/BaseUserUpdate.vue");
 
+
+var baseBreadcrumb = [{
+  text: 'User Management',
+  disabled: true,
+  href: '/admin/#/auth/user'
+}];
 var user = [{
   path: '/auth/user',
   component: _backend_components_user_management_BaseUserManagement__WEBPACK_IMPORTED_MODULE_0__["default"],
-  name: 'user-management'
+  name: 'user-management',
+  meta: {
+    breadcrumb: baseBreadcrumb
+  },
+  children: [{
+    path: '/auth/user/:id',
+    name: 'show',
+    component: _backend_components_user_management_UserManagementShow__WEBPACK_IMPORTED_MODULE_1__["default"],
+    props: true,
+    meta: {
+      breadcrumb: baseBreadcrumb.concat({
+        text: "User Details",
+        disabled: true,
+        href: ''
+      })
+    }
+  }]
 }];
 
 
@@ -46319,6 +47214,93 @@ $(function () {
     });
   });
 });
+
+/***/ }),
+
+/***/ "./resources/js/vue-tools/CollapsibleSidebar.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/vue-tools/CollapsibleSidebar.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CollapsibleSidebar_vue_vue_type_template_id_54efec2b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CollapsibleSidebar.vue?vue&type=template&id=54efec2b&scoped=true& */ "./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=template&id=54efec2b&scoped=true&");
+/* harmony import */ var _CollapsibleSidebar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CollapsibleSidebar.vue?vue&type=script&lang=js& */ "./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _CollapsibleSidebar_vue_vue_type_style_index_0_id_54efec2b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CollapsibleSidebar.vue?vue&type=style&index=0&id=54efec2b&scoped=true&lang=css& */ "./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=style&index=0&id=54efec2b&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _CollapsibleSidebar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CollapsibleSidebar_vue_vue_type_template_id_54efec2b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CollapsibleSidebar_vue_vue_type_template_id_54efec2b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "54efec2b",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/vue-tools/CollapsibleSidebar.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapsibleSidebar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CollapsibleSidebar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapsibleSidebar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=style&index=0&id=54efec2b&scoped=true&lang=css&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=style&index=0&id=54efec2b&scoped=true&lang=css& ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_laravel_mix_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapsibleSidebar_vue_vue_type_style_index_0_id_54efec2b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--7-1!../../../node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/vue-loader/lib??vue-loader-options!./CollapsibleSidebar.vue?vue&type=style&index=0&id=54efec2b&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=style&index=0&id=54efec2b&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_laravel_mix_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapsibleSidebar_vue_vue_type_style_index_0_id_54efec2b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_laravel_mix_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapsibleSidebar_vue_vue_type_style_index_0_id_54efec2b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_laravel_mix_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapsibleSidebar_vue_vue_type_style_index_0_id_54efec2b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_laravel_mix_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapsibleSidebar_vue_vue_type_style_index_0_id_54efec2b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_laravel_mix_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapsibleSidebar_vue_vue_type_style_index_0_id_54efec2b_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=template&id=54efec2b&scoped=true&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=template&id=54efec2b&scoped=true& ***!
+  \**************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_laravel_mix_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapsibleSidebar_vue_vue_type_template_id_54efec2b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CollapsibleSidebar.vue?vue&type=template&id=54efec2b&scoped=true& */ "./node_modules/laravel-mix/node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/vue-tools/CollapsibleSidebar.vue?vue&type=template&id=54efec2b&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_laravel_mix_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapsibleSidebar_vue_vue_type_template_id_54efec2b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_laravel_mix_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollapsibleSidebar_vue_vue_type_template_id_54efec2b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

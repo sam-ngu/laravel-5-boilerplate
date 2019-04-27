@@ -1,25 +1,30 @@
 <template>
     <v-app :dark="dark">
-        <layout-master :disable-sidebar="showSidebar">
+        <layout-master :disable-sidebar="showSidebar" v-if="messageBus.isReady()">
             <v-breadcrumbs :items="breadcrumbItems" divider=">"></v-breadcrumbs>
             <router-view></router-view>
         </layout-master>
+        <loading-eclipse v-if="!messageBus.isReady()"></loading-eclipse>
     </v-app>
 </template>
 
 <script>
     import LayoutMaster from "./layout/Master";
     import {EventBus} from "../../vue-tools/event-bus";
+    import {MessageBus} from "../../vue-tools/message-bus";
+    import LoadingEclipse from "../../vue-tools/LoadingEclipse";
 
     export default {
         name: 'app',
         components: {
+            LoadingEclipse,
             LayoutMaster,
         },
         data(){
             return{
                 dark: false,
                 breadcrumbItems : this.$route.meta.breadcrumb,
+                messageBus: MessageBus,
             }
         },
         computed: {
@@ -37,9 +42,7 @@
             }
         },
         methods: {
-            fetchAppConfig(){
 
-            },
 
         },
         mounted(){

@@ -1,5 +1,6 @@
 import BaseUserManagement from '../../../backend/components/user-management/BaseUserManagement'
-import UserManagementShow from '../../../backend/components/user-management/UserManagementShow'
+import BaseUserUpdate from '../../components/user-management/user-update/BaseUserUpdate'
+import BaseUserCreate from '../../../backend/components/user-management/user-create/BaseUserCreate'
 
 
 let baseBreadcrumb = [
@@ -23,11 +24,25 @@ const user = [
             {
                 path: '/auth/user/:id',
                 name: 'show',
-                component: UserManagementShow,
+                component: BaseUserUpdate,
                 props: true,
                 meta: {
                     breadcrumb: baseBreadcrumb.concat({
                         text: "User Details",
+                        disabled: true,
+                        href: '',
+                    })
+                }
+
+            },
+            {
+                path: '/auth/user/create',
+                name: 'create',
+                component: BaseUserCreate,
+                props: true,
+                meta: {
+                    breadcrumb: baseBreadcrumb.concat({
+                        text: "Create User",
                         disabled: true,
                         href: '',
                     })

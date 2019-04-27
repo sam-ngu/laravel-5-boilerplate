@@ -8,6 +8,7 @@
 
 <script>
     import UserManagementTable from "./UserManagementTable";
+
     export default {
         name: "BaseUserManagement",
         components: {UserManagementTable},

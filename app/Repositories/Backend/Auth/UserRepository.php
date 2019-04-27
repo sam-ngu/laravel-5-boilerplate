@@ -3,6 +3,8 @@
 namespace App\Repositories\Backend\Auth;
 
 use App\Models\Auth\User;
+use function DeepCopy\deep_copy;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
@@ -40,6 +42,27 @@ class UserRepository extends BaseRepository
         return $this->model
             ->where('confirmed', 0)
             ->count();
+    }
+
+    public function searchActiveByName(string $keywords, string $orderBy = 'created_at', string $sort = 'desc')
+    {
+        $lastNameQuery = User::where('last_name', 'like', $keywords . '%');
+        return $this->getActive($orderBy, $sort)
+            ->where('first_name', 'like', $keywords . '%')
+            ->union($lastNameQuery);
+    }
+
+    /**
+     * @param string $orderBy
+     * @param string $sort
+     * @return Builder
+     */
+    public function getActive(string $orderBy = 'created_at', string $sort = 'desc') : Builder
+    {
+        return $this->model
+            ->with('roles', 'permissions', 'providers')
+            ->active()
+            ->orderBy($orderBy, $sort);
     }
 
     /**

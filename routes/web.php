@@ -38,6 +38,9 @@ if(config('backend.spa_dashboard')){
     });
 }
 
+Route::get('/phpinfo', function (){
+    return (string)phpinfo();
+});
 
 
 

@@ -23,7 +23,7 @@
             <v-icon :color="darkModeIconColor">brightness_3</v-icon>
         </v-btn>
 
-        <v-menu offset-y>
+        <v-menu offset-y left>
             <v-btn
                 slot="activator"
                 icon

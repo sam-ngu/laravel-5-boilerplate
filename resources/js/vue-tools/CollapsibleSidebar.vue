@@ -4,9 +4,9 @@
         <nav id="sidebar" :class="{'active': showSidebarComputed}">
         <!--<nav id="sidebar">-->
             <!-- Close Sidebar Button -->
-            <div id="dismiss" @click="dismiss">
-                <i class="far fa-times-circle"></i>
-            </div>
+            <!--<div id="dismiss" @click="dismiss">-->
+                <!--<i class="far fa-times-circle"></i>-->
+            <!--</div>-->
 
             <!-- Sidebar Header -->
             <div class="sidebar-header">
