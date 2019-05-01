@@ -5,7 +5,7 @@ import SwalMixin from '../mixins/SwalMixin'
 export const MessageBus = new Vue({
     data(){
         return {
-            session: null,
+            session: {},
             states: {
                 ready: false, // if false then will load page loader. This is to ensure all variable eg session are loaded before mounting our app
             }
@@ -16,15 +16,18 @@ export const MessageBus = new Vue({
         getSession(){
             return this.session;
         },
+        setSession(sessionJsonString){
+            this.session.session = JSON.parse(sessionJsonString)  // available only if an admin log in as another user
+        },
 
         isReady(){
             return this.states.ready;
         },
 
         fetchSession(){
-            return axios.get('/api/v1/auth/session')
+            return axios.get('/api/v1/auth/current-user')
                 .then(function (response) {
-                    this.session = response.data.data;
+                    this.session.user = response.data.data;
                     this.states.ready = true
                 }.bind(this))
                 .catch(function (response) {
@@ -33,7 +36,6 @@ export const MessageBus = new Vue({
                         errors = {errors};
                     swal.close();
                     this.swalMessage("error", errors);
-                    this.swalMessage("error", response.response.error)
                 }.bind(this))
         }
     },

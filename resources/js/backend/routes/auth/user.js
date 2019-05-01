@@ -23,7 +23,7 @@ const user = [
         children: [
             {
                 path: '/auth/user/:id',
-                name: 'show',
+                name: 'user-show',
                 component: BaseUserUpdate,
                 props: true,
                 meta: {
@@ -33,11 +33,10 @@ const user = [
                         href: '',
                     })
                 }
-
             },
             {
                 path: '/auth/user/create',
-                name: 'create',
+                name: 'user-create',
                 component: BaseUserCreate,
                 props: true,
                 meta: {

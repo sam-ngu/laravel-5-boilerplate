@@ -144,7 +144,9 @@ class LoginController extends Controller
             auth()->loginUsingId((int) $admin_id);
 
             // Redirect to backend user page
-            return redirect()->route('admin.auth.user.index');
+            return config('backend.spa_backend') ?
+                redirect()->route('admin.home', ['to' => 'user-management'] ) :
+                redirect()->route('admin.auth.user.index');
         } else {
             app()->make(Auth::class)->flushTempSession();
 

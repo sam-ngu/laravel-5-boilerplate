@@ -3,32 +3,24 @@
         <v-layout row>
             <v-flex>
                 <v-toolbar flat>
-                    <v-toolbar-title>User Management</v-toolbar-title>
+                    <v-toolbar-title>Role Management</v-toolbar-title>
 
                     <v-spacer></v-spacer>
 
                     <v-tooltip bottom class="ml-auto">
                         <template slot="activator">
                             <v-btn
-                                icon color="success"
+                                icon
+                                class="no-underline"
+                                color="success"
                                 :to="{
-                                    name: 'create',
+                                    name: 'role-create',
                                 }"
                             ><v-icon>add</v-icon></v-btn>
                         </template>
-                        <span>Add new user</span>
+                        <span>Add new role</span>
                     </v-tooltip>
                 </v-toolbar>
-            </v-flex>
-        </v-layout>
-
-        <v-layout row> <!--search bar-->
-            <v-flex>
-                <v-text-field
-                    class="pl-2 pr-5"
-                    append-icon="fas fa-search"
-                    label="Search"
-                    v-model="searchKeywords"></v-text-field>
             </v-flex>
         </v-layout>
 
@@ -36,42 +28,42 @@
             <v-flex>
                 <v-data-table
                     :headers="headers"
-                    :items="data.users"
+                    :items="data.roles"
                     :loading="states.isLoading"
                     hide-actions
                     class="elevation-3"
                 >
                     <template slot="items" slot-scope="props">
                         <tr>
-                            <td class="text-xs-left" >
-                                <router-link :to="{
-                            name: 'show',
-                            params: {
-                                id: props.item.id,
-                                data: props.item,
-                                show: true,
-                            }
-                        }">
-                                    {{ props.item.last_name }}
+                            <td class="px-2 text-xs-left" >
+                                <router-link
+                                    v-if="props.item.name!=='administrator'"
+                                    :to="{
+                                        name: 'role-show',
+                                        params: {
+                                            id: props.item.id,
+                                            data: props.item,
+                                            show: true,
+                                        }
+                                }">
+                                    {{ titleCase(props.item.name) }}
                                 </router-link>
+                                <div v-else>{{titleCase(props.item.name)}}</div>
                             </td>
-                            <td class="text-xs-left">{{ props.item.first_name }}</td>
-                            <td class="text-xs-left">{{ props.item.email }}</td>
-                            <td class="text-xs-right">
-                                <v-chip text-color="white" :color="props.item.confirmed_label ? 'green' : 'red'">
-                                    {{ props.item.confirmed_label ? 'Yes' : 'No' }}
-                                </v-chip>
+                            <td class="px-2 text-xs-left">
+                                <!--if permission not empty-->
+                                    <!--for each permissions, list the name-->
+                                <div v-if="!isEmpty(props.item.permission)">
+                                    <span v-for="(item, index) in props.item.permission" :key="index">
+                                        {{titleCase(item.name)}}
+                                    </span>
+                                </div>
+                                <div v-else v-text="'N/A'"></div>
                             </td>
-                            <td class="text-xs-left">{{ props.item.roles_label }}</td>
-                            <td class="text-xs-right">{{ props.item.permissions_label }}</td>
-                            <td class="text-xs-right">{{ props.item.social_buttons }}</td>
-                            <td class="text-xs-right">{{ props.item.updated_at }}</td>
-                            <td class="justify-center layout px-0">
+                            <td class="px-2 text-xs-left">{{ String(props.item.user_num) }}</td>
+                            <td class="px-2 justify-center layout px-0">
                                 <v-layout row align-center justify-center fill-height>
-
-                                    <user-management-table-action-list :user="props.item" />
-
-                                    <v-tooltip bottom>
+                                    <v-tooltip bottom v-if="props.item.name!=='administrator'">
                                         <v-icon
                                             slot="activator"
                                             small
@@ -81,6 +73,7 @@
                                         </v-icon>
                                         <span>Delete</span>
                                     </v-tooltip>
+                                    <div v-else>N/A</div>
                                 </v-layout>
                             </td>
                         </tr>
@@ -88,6 +81,12 @@
                     </template>
                 </v-data-table>
             </v-flex>
+        </v-layout>
+
+        <v-layout column>
+            <div class="pt-3">
+                <h5>Total: {{apiMeta.total}}</h5>
+            </div>
         </v-layout>
         <v-divider></v-divider>
         <v-layout row justify-space-between>
@@ -98,7 +97,7 @@
                     round
                     :length="apiMeta.last_page"
                     total-visible="10"
-                    @input="fetchUsers"
+                    @input="fetchRoles"
                 ></v-pagination>
             </div>
 
@@ -109,7 +108,7 @@
                     messages="Items per page"
                     :items="[10,25,50,100,200,500,1000]"
                     v-model="pageSize"
-                    @change="fetchUsers"
+                    @change="fetchRoles"
                     label="Items per page"
                     style="width: 150px;"
                 ></v-select>
@@ -124,12 +123,12 @@
 <script>
     import {EventBus} from "../../../vue-tools/event-bus";
     import SwalMixin from "../../../mixins/SwalMixin";
-    import UserManagementTableActionList from "./UserManagementTableActionList";
+    import StringHelperMixin from "../../../mixins/StringHelperMixin";
 
     export default {
-        name: "UserManagementTable",
-        components: {UserManagementTableActionList},
-        mixins: [SwalMixin],
+        name: "RoleTable",
+        components: {},
+        mixins: [SwalMixin, StringHelperMixin],
         data() {
             return {
                 states: {
@@ -137,53 +136,59 @@
                 },
                 apiMeta:{},
                 pageSize: 200,
-                searchKeywords: "",
-                searchProductTimeoutId: null,
 
                 data: {
-                    users : [],  // hold users info from api call
+                    roles : [],  // hold roles info from api call
                 },
+
                 headers: [
                     {
-                        text: 'Last Name',
+                        text: 'Role',
                         align: 'left',
-                        sortable: true,
-                        value: 'last_name'
+                        sortable: false,
+                        value: 'role',
+                        class: "px-2"
                     },
-                    { text: 'First Name', value: 'first_name', sortable: true },
-                    { text: 'E-mail', value: 'email', sortable: true },
-                    { text: 'Confirmed', value: 'confirmed', sortable: false },
-                    { text: 'Roles', value: 'roles', sortable: false},
-                    { text: 'Other Permissions', value: 'other', sortable: false },
-                    { text: 'Social', value: 'social', sortable: false },
-                    { text: 'Last Updated', value: 'last_updated', sortable: false },
-                    { text: 'Actions', value: 'action', sortable: false },
+                    { text: 'Permissions', value: 'permissions', sortable: false, class: "px-2" },
+                    { text: 'Number of Users', value: 'user_num', sortable: false, class: "px-2" },
+                    { text: 'Actions', value: 'action', sortable: false, align: "center", class: "px-2" },
                 ],
 
             }
-        },
-        props: {},
-
-        watch: {
-            searchKeywords: _.throttle(function () {
-                clearTimeout(this.searchProductTimeoutId);
-                this.isLoading = false;
-                this.searchProductTimeoutId = setTimeout(function(){
-                    this.fetchUsers();
-                }.bind(this), 1500);
-            }),
-        },
-        computed: {
-
         },
         methods: {
             deleteItem(item){
                 this.swalLoader();
                 this.states.isLoading = true;
-                let uri = '/api/v1/user/' + String(item.id);
+                let uri = '/api/v1/roles/' + String(item.id);
                 axios.delete(uri)
                     .then(function (response) {
                         swal.close();
+                        this.states.isLoading = false;
+                        this.reloadTable();
+
+                    }.bind(this)).catch(function (response) {
+                        console.log('Error: ' + response);
+
+                        let errors = response.response.data.error;
+                        if ((typeof errors) === "string")
+                            errors = {errors};
+                        swal.close();
+                        this.swalMessage("error", errors)
+
+                }.bind(this));
+            },
+            fetchRoles(){
+                this.swalLoader();
+                this.states.isLoading = true;
+                let uri;
+                uri = `/api/v1/roles?page=${this.apiMeta.current_page}&page_size=${this.pageSize}`;
+
+                //fetch data / call api
+                return axios.get(uri)
+                    .then(function (response) {
+                        swal.close();
+                        this.data.roles = response.data.data;
                         this.states.isLoading = false;
                         this.apiMeta = response.data.meta;
 
@@ -198,47 +203,26 @@
 
                     }.bind(this));
             },
-            fetchUsers(){
-                this.swalLoader();
-                this.states.isLoading = true;
-                let uri;
-                uri = `/api/v1/user?page=${this.apiMeta.current_page}`;
-                if(this.searchKeywords != null)
-                    uri += `&search_keywords=${this.searchKeywords}`;
-
-                uri += `&page_size=${this.pageSize}`;
-
-                //fetch data / call api
-                return axios.get(uri)
-                    .then(function (response) {
-                        swal.close();
-                        this.data.users = response.data.data;
-                        this.states.isLoading = false;
-                        this.apiMeta = response.data.meta;
-
-                    }.bind(this)).catch(function (response) {
-                        console.log('Error: ' + response);
-
-                        let errors = response.response.data.error;
-                        if ((typeof errors) === "string")
-                            errors = {errors};
-                        swal.close();
-                        this.swalMessage("error", errors)
-
-                }.bind(this));
+            isEmpty(array){
+                return _.isEmpty(array);
+            },
+            reloadTable(){
+                this.fetchRoles()
             }
         },
         mounted() {
-            // call api -- grab users deets
-            this.fetchUsers();
+            // call api -- grab roles deets
+            this.fetchRoles();
 
             EventBus.$on("table-reload-required", function () {
-                this.fetchUsers()
+                this.reloadTable()
             }.bind(this))
         },
     }
 </script>
 
 <style scoped>
-
+    .no-underline:hover {
+        text-decoration: none;
+    }
 </style>

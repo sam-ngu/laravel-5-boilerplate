@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 
 Route::group([
     'namespace' => 'Api',
-    'as' => 'api.',
+    'as' => 'api.',  //prefix infront of route names
     'middleware' => [
         'auth:api',
         \App\Http\Middleware\ParseFormData::class

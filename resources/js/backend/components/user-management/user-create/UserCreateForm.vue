@@ -174,7 +174,7 @@
                 this.inputData.confirmed = Number(this.inputData.confirmed);
                 this.inputData.confirmation_email = Number(this.inputData.confirmation_email);
 
-                let uri = "/api/v1/user";
+                let uri = "/api/v1/users";
 
                 axios.post(uri, this.inputData)
                     .then(function(response){

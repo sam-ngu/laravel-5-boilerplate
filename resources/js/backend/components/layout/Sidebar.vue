@@ -34,6 +34,7 @@
             </v-list-tile>
 
             <v-list-group
+                    v-if="session.user.roles_label === 'Administrator'"
                     prepend-icon="account_circle"
                     value="true"
             >
@@ -89,6 +90,7 @@
 
 <script>
     import {EventBus} from "../../../vue-tools/event-bus";
+    import {MessageBus} from "../../../vue-tools/message-bus";
 
     export default {
         name: "sidebar",
@@ -114,7 +116,8 @@
                     ['Read', 'insert_drive_file'],
                     ['Update', 'update'],
                     ['Delete', 'delete']
-                ]
+                ],
+                session: MessageBus.getSession(),
             }
         },
         computed:{

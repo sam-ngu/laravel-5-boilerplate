@@ -1,14 +1,14 @@
 <template>
     <collapsible-sidebar :show-sidebar="show" @dismiss-sidebar="back">
         <template slot="header">
-            <h1>Create User</h1>
+            <h1>Create Role</h1>
         </template>
 
         <template slot="content">
             <v-container>
                 <v-layout row>
                     <v-flex>
-                        <user-create-form @user-created="back"></user-create-form>
+                        <role-create-form @role-created="back"></role-create-form>
 
                     </v-flex>
                 </v-layout>
@@ -21,11 +21,11 @@
 <script>
     import CollapsibleSidebar from "../../../../vue-tools/CollapsibleSidebar";
     import SwalMixin from "../../../../mixins/SwalMixin";
-    import UserCreateForm from "./UserCreateForm";
+    import RoleCreateForm from "./RoleCreateForm";
     export default {
-        name: "BaseUserCreate",
+        name: "BaseRoleCreate",
         mixins: [SwalMixin],
-        components: {UserCreateForm, CollapsibleSidebar},
+        components: {RoleCreateForm, CollapsibleSidebar},
         data() {
             return {
                 show: false,
@@ -35,7 +35,7 @@
         computed: {},
         methods: {
             back() {
-                this.$router.push({name: 'user-management'})
+                this.$router.push({name: 'role-management'})
             }
         },
         mounted() {

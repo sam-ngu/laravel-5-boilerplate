@@ -1,14 +1,6 @@
 <template>
     <div>
-        <v-alert
-            v-if="displayLogInAsAlert()"
-            :value="true"
-            color="info"
-            icon="info"
-            outline>
-            You are currently logged in as {{ session.user.first_name + ' ' + session.user.last_name }}.
-            <a href="{{ route("frontend.auth.logout-as") }}">Re-Login as {{ session.session.admin_user_name }}</a>.
-        </v-alert>
+        <logged-in-as-alert/>
 
         <sidebar v-if="!disableSidebar" v-model="showSidebar"></sidebar>
 
@@ -25,16 +17,15 @@
     import Sidebar from "./Sidebar";
     import Navbar from "./NavBar";
     import {EventBus} from "../../../vue-tools/event-bus";
-    import {MessageBus} from "../../../vue-tools/message-bus";
+    import LoggedInAsAlert from "./LoggedInAsAlert";
 
 
     export default {
         name: "layout-master",
-        components: {Navbar, Sidebar},
+        components: {LoggedInAsAlert, Navbar, Sidebar},
         data() {
             return {
                 showSidebar: null,
-                session: null,
             }
         },
         props: {
@@ -44,10 +35,7 @@
             }
         },
         methods: {
-            displayLogInAsAlert(){
-                let session = MessageBus.getSession();
-                return !_.isEmpty(session.user) && session.session.admin_user_id && session.session.temp_user_id;
-            }
+
         },
         mounted() {
             EventBus.$on('toggled-sidebar', function () {
@@ -55,7 +43,6 @@
             }.bind(this))
         },
     }
-
 
 </script>
 

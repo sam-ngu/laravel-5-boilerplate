@@ -11,7 +11,7 @@
             >
                 more_vert
             </v-icon>
-            <span>more</span>
+            <span>More</span>
         </v-tooltip>
         <v-list>
             <v-list-tile
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-    import {MessageBus} from "../../../vue-tools/message-bus";
+    import {MessageBus} from "../../../../vue-tools/message-bus";
 
     export default {
         name: "UserManagementTableActionList",
@@ -56,8 +56,9 @@
         computed: {},
         methods: {
             logInAsUser(){
-                let uri = '/api/v1/admin/auth/'
-                axios.get()
+                let uri = '/admin/auth/user/' + String(this.user.id) + '/login-as';
+                // axios.get(uri)
+                window.location.href = window.location.protocol + "//" + window.location.hostname + uri;
             },
             deactivate(){
 

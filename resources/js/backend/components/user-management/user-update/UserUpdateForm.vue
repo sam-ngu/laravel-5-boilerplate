@@ -219,7 +219,7 @@
                 this.inputData.confirmed = Number(this.inputData.confirmed);
                 this.inputData.confirmation_email = Number(this.inputData.confirmation_email);
 
-                let uri = "/api/v1/user";
+                let uri = "/api/v1/users/" + String(this.data.id);
 
                 axios.patch(uri, this.inputData)
                     .then(function(response){
@@ -232,7 +232,7 @@
                         if ((typeof errors) === "string")
                             errors = {errors};
                         this.swalMessage("error", errors)
-                    })
+                    }.bind(this))
             },
         },
         mounted() {

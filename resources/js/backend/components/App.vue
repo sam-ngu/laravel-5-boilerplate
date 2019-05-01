@@ -27,6 +27,12 @@
                 messageBus: MessageBus,
             }
         },
+        props: {
+            session: { // json string contains the current session info
+                type: String,
+                required : true,
+            }
+        },
         computed: {
             showSidebar(){
                 // if is in control then show
@@ -48,7 +54,23 @@
         mounted(){
             EventBus.$on('toggled-dark', function () {
                 this.dark = !this.dark;
-            }.bind(this))
+            }.bind(this));
+
+            MessageBus.setSession(this.session);
+
+            // to route to the correct page if required
+            let url = new URL(window.location.href);
+            let routeName = url.searchParams.get("to");
+            if(routeName){
+                this.$router.push({
+                    name: routeName
+                })
+            }
+
+
+
+
+
         }
     }
 </script>

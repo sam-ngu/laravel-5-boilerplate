@@ -18,10 +18,14 @@
     @stack('after-styles')
 </head>
 <body>
+{{--<div style="bottom: 0; right: 0; position: absolute; z-index: 2;" class="text-center">--}}
+
+    {{--@include('includes.partials.logged-in-as')--}}
+{{--</div>--}}
 
 {{--vue js instance--}}
 <div id="app">
-    <app></app>
+    <app session="{{ json_encode(array_only(session()->all(), ['admin_user_id', 'admin_user_name', 'temp_user_id']) )  }}"></app>
 </div>
 
 
