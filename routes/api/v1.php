@@ -6,6 +6,7 @@
  * Time: 6:24 PM
  */
 use App\Http\Controllers\Api\V1\User\UserController;
+use App\Http\Controllers\Api\V1\User\UserStatusController;
 
 Route::group([
     'namespace' => 'V1',
@@ -83,7 +84,17 @@ Route::group([
 
         /*User routes*/
         Route::apiResource('users', 'UserController');
-        Route::get('users/current-user', 'UserController@currentLoggedIn');
+
+        Route::group([
+            'prefix' => 'users/{user}'
+        ], function (){
+            // Status
+            Route::get('mark/{status}', [UserStatusController::class, 'mark'])->where(['status' => '[0,1]']);
+
+            // Deleted
+            Route::get('delete', [UserStatusController::class, 'delete']);
+            Route::get('restore', [UserStatusController::class, 'restore']);
+        });
 
     });
 

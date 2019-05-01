@@ -44,6 +44,22 @@ class UserRepository extends BaseRepository
             ->count();
     }
 
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    public function searchByName(string $keywords, string $orderBy = 'created_at', string $sort = 'desc')
+    {
+        $lastNameQuery = User::where('last_name', 'like', $keywords . '%');
+        $this->model = $this->model
+                        ->with('roles', 'permissions', 'providers')
+                        ->where('first_name', 'like', $keywords . '%')
+                        ->union($lastNameQuery);
+        return $this;
+    }
+
+
     public function searchActiveByName(string $keywords, string $orderBy = 'created_at', string $sort = 'desc')
     {
         $lastNameQuery = User::where('last_name', 'like', $keywords . '%');
@@ -53,17 +69,29 @@ class UserRepository extends BaseRepository
     }
 
     /**
+     * @param bool $active
      * @param string $orderBy
      * @param string $sort
-     * @return Builder
+     * @return $this
      */
-    public function getActive(string $orderBy = 'created_at', string $sort = 'desc') : Builder
+    public function getActive(bool $active = true, string $orderBy = 'created_at', string $sort = 'desc')
     {
-        return $this->model
+        $this->model = $this->model
             ->with('roles', 'permissions', 'providers')
-            ->active()
+            ->active($active)
             ->orderBy($orderBy, $sort);
+        return $this;
     }
+
+    public function getDeleted($orderBy = 'created_at', $sort = 'desc')
+    {
+        $this->model = $this->model
+            ->with('roles', 'permissions', 'providers')
+            ->onlyTrashed()
+            ->orderBy($orderBy, $sort);
+        return $this;
+    }
+
 
     /**
      * @param int    $paged

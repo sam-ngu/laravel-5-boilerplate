@@ -29,7 +29,8 @@ class UserResource extends JsonResource
             'social_buttons' => data_get($this, 'social_buttons'),
             'last_login_at'=> (string)data_get($this, 'last_login_at'),
             'last_login_ip'=> (string)data_get($this, 'last_login_ip'),
-            'updated_at' => (string)data_get($this, 'updated_at')
+            'updated_at' => (string)data_get($this, 'updated_at'),
+            'deleted_at' => (string)data_get($this, 'deleted_at'),
         ];
     }
 }

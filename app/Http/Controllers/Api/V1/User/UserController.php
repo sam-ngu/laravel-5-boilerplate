@@ -37,14 +37,25 @@ class UserController extends Controller
     {
         $searchKeyword = (string)$request->search_keywords ?? null;
         $pageSize = (int)$request->page_size ?? 25;
+        $userStatus = (string)strtolower($request->status) ?? "active";
+
+        $isActive = $userStatus === 'active';
+        $isDeleted = $userStatus === 'deleted';
+        $isDeactivated = $userStatus === 'deactivated';
+
         $users = (new UserRepository());
 
         if($searchKeyword){
             $searchKeyword .= "%";
-            $users = $users->searchActiveByName($searchKeyword, 'id', 'asc');
-        }else{
-            $users = $users->getActive('id', 'asc');
+            $users = $users->searchByName($searchKeyword, 'id', 'asc');
         }
+
+        if($isActive)
+            $users = $users->getActive(true, 'id', 'desc');
+        if ($isDeactivated)
+            $users = $users->getActive(false, 'id', 'desc');
+        if($isDeleted)
+            $users = $users->getDeleted('id', 'desc');
 
         return UserResource::collection($users->paginate($pageSize))->response();
     }
