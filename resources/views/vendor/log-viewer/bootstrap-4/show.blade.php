@@ -1,3 +1,8 @@
+@if(config('backend.spa_backend', false))
+    @include('vendor.log-viewer-default.bootstrap-4.show')
+    @php(die()) {{--extends directive got called anyway, die is a workaround to force php to stop here--}}
+@endif
+
 @extends('backend.layouts.app')
 
 @push('after-styles')
