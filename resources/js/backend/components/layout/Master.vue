@@ -14,7 +14,7 @@
 </template>
 
 <script>
-    import Sidebar from "./Sidebar";
+    import Sidebar from "./sidebar/BaseSidebar";
     import Navbar from "./NavBar";
     import {EventBus} from "../../../vue-tools/event-bus";
     import LoggedInAsAlert from "./LoggedInAsAlert";

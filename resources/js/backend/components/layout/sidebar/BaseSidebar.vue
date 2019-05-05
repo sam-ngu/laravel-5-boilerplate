@@ -11,27 +11,29 @@
 
     >
         <v-list inset>
+            <sidebar-list-tile to="'/" title="Dashboard" icon="home"/>
 
-            <v-list-tile to="/">
-                <v-list-tile-action>
-                    <v-icon>home</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-title>Dashboard</v-list-tile-title>
-            </v-list-tile>
 
-            <v-list-tile to="/backtest">
-                <v-list-tile-action>
-                    <v-icon>equalizer</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-title>Menu</v-list-tile-title>
-            </v-list-tile>
+            <!--<v-list-tile to="/">-->
+                <!--<v-list-tile-action>-->
+                    <!--<v-icon>home</v-icon>-->
+                <!--</v-list-tile-action>-->
+                <!--<v-list-tile-title>Dashboard</v-list-tile-title>-->
+            <!--</v-list-tile>-->
 
-            <v-list-tile to="/trade-history">
-                <v-list-tile-action>
-                    <v-icon>av_timer</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-title>Menu</v-list-tile-title>
-            </v-list-tile>
+            <!--<v-list-tile to="/backtest">-->
+                <!--<v-list-tile-action>-->
+                    <!--<v-icon>equalizer</v-icon>-->
+                <!--</v-list-tile-action>-->
+                <!--<v-list-tile-title>Menu</v-list-tile-title>-->
+            <!--</v-list-tile>-->
+
+            <!--<v-list-tile to="/trade-history">-->
+                <!--<v-list-tile-action>-->
+                    <!--<v-icon>av_timer</v-icon>-->
+                <!--</v-list-tile-action>-->
+                <!--<v-list-tile-title>Menu</v-list-tile-title>-->
+            <!--</v-list-tile>-->
 
             <v-list-group
                     v-if="session.user.roles_label === 'Administrator'"
@@ -51,17 +53,27 @@
                         <v-list-tile-title>Access</v-list-tile-title>
                     </v-list-tile>
 
-                    <v-list-tile
-                            v-for="(admin, i) in admins"
-                            :key="i"
-                            @click=""
-                            :to="admin.to"
-                    >
-                        <v-list-tile-title v-text="admin.name"></v-list-tile-title>
-                        <v-list-tile-action >
-                            <v-icon v-text="admin.icon"></v-icon>
-                        </v-list-tile-action>
-                    </v-list-tile>
+                    <sidebar-list-tile
+                        v-for="(admin, i) in admins"
+                        :key="i"
+                        @click=""
+                        :to="admin.to"
+                        :icon="admin.icon"
+                        :title="admin.name"
+                    />
+
+                    <!--<v-list-tile-->
+                            <!--v-for="(admin, i) in admins"-->
+                            <!--:key="i"-->
+                            <!--@click=""-->
+                            <!--:to="admin.to"-->
+                    <!--&gt;-->
+                        <!--<v-list-tile-title v-text="admin.name"></v-list-tile-title>-->
+                        <!--<v-list-tile-action >-->
+                            <!--<v-icon v-text="admin.icon"></v-icon>-->
+                        <!--</v-list-tile-action>-->
+                    <!--</v-list-tile>-->
+
                 </v-list-group>
             </v-list-group>
 
@@ -80,12 +92,13 @@
 </template>
 
 <script>
-    import {EventBus} from "../../../vue-tools/event-bus";
-    import {MessageBus} from "../../../vue-tools/message-bus";
+    import {EventBus} from "../../../../vue-tools/event-bus";
+    import {MessageBus} from "../../../../vue-tools/message-bus";
+    import SidebarListTile from "./SidebarListTile";
 
     export default {
         name: "sidebar",
-        components: {},
+        components: {SidebarListTile},
         data() {
             return {
                 admins: [
