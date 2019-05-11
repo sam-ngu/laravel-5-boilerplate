@@ -11,7 +11,7 @@
 
     >
         <v-list inset>
-            <sidebar-list-tile to="'/" title="Dashboard" icon="home"/>
+            <sidebar-list-tile to="/" title="Dashboard" icon="home"/>
 
 
             <!--<v-list-tile to="/">-->

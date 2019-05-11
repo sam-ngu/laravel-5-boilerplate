@@ -43,8 +43,16 @@
             }
         },
         watch: {
-            '$route'(){
-                this.breadcrumbItems = this.$route.meta.breadcrumb
+            '$route'(){ // make sure only the last breadcrumb link is enabled
+                _.forEach(this.$route.meta.breadcrumb, function (value, index) {
+                    let length = this.$route.meta.breadcrumb.length;
+                    if(length -1 !== index) // if not the last item
+                        this.$route.meta.breadcrumb[index].disabled = false;
+                    else
+                        this.$route.meta.breadcrumb[index].disabled = true;
+                }.bind(this));
+                this.$route.meta.breadcrumb[this.$route.meta.breadcrumb.length-1].disabled = true;
+                this.breadcrumbItems = this.$route.meta.breadcrumb;
             }
         },
         methods: {
