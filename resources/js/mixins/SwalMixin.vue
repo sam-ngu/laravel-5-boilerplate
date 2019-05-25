@@ -77,6 +77,31 @@
                         return;
                     }
                 }.bind(this));
+            },
+
+            swalConfirm(html="", confirmCallback, rejectCallback){
+                return swal({
+                    title: "Are you sure?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    confirmButtonClass: 'success',
+                    cancelButtonClass: 'error',
+                    buttonsStyling: true,
+                    html:html,
+                    cancelButtonText: 'No'
+                }).then(function (result) {
+                    if(result.value){ //confirm
+                        if(confirmCallback)
+                            confirmCallback();
+                        return;
+                    }
+                    if(result.dismiss === swal.DismissReason.cancel){ //cancel
+                        if(rejectCallback)
+                            rejectCallback();
+                        return;
+                    }
+                }.bind(this));
             }
 
 

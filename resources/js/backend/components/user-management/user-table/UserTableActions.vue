@@ -144,14 +144,17 @@
                 this.swalLoader();
                 let uri;
 
-                if(this.isActive || this.isDeactivated){
-                    uri = '/api/v1/users/' + String(this.user.id);
-                    this.callApi(uri, 'delete')
-                }
-                if(this.isDeleted){
-                    uri = '/api/v1/users/' + String(this.user.id) + '/delete';
-                    this.callApi(uri, 'get');
-                }
+                this.swalConfirm("", function(){
+                    if(this.isActive || this.isDeactivated){
+                        uri = '/api/v1/users/' + String(this.user.id);
+                        this.callApi(uri, 'delete')
+                    }
+                    if(this.isDeleted){
+                        uri = '/api/v1/users/' + String(this.user.id) + '/delete';
+                        this.callApi(uri, 'get');
+                    }
+                }.bind(this));
+
 
 
 

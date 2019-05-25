@@ -6,9 +6,8 @@
         >
             <v-card-title>
                 <v-layout row justify-space-start>
-                    <v-avatar :size="htmlAttr.avatarSize">
-                        <img :src="avatar" alt="NA">
-                    </v-avatar>
+                    <adorable-avatar :size="htmlAttr.avatarSize" :name="data.first_name" :avatar-location="data.avatar_location" />
+
                     <div>
                         <h5>Status:
                             <v-chip
@@ -133,12 +132,12 @@
 <script>
     import SwalMixin from "../../../../mixins/SwalMixin";
     import {EventBus} from "../../../../vue-tools/event-bus";
-    import AvatarMixin from "../../../../mixins/AvatarMixin";
+    import AdorableAvatar from "../../../../vue-tools/AdorableAvatar";
 
     export default {
         name: "UserUpdateForm",
-        mixins: [SwalMixin,AvatarMixin],
-        components: {},
+        mixins: [SwalMixin],
+        components: {AdorableAvatar},
         data() {
             return {
                 htmlAttr: {
@@ -192,9 +191,6 @@
             }
         },
         computed: {
-            avatar(){
-                return this.data.avatar_location ? this.data.avatar_location : this.generateAvatarCdn(this.htmlAttr.avatarSize, this.data.first_name);
-            }
         },
         methods: {
             onEdit(){
