@@ -28,14 +28,19 @@ export const MessageBus = new Vue({
             return axios.get('/api/v1/auth/current-user')
                 .then(function (response) {
                     this.session.user = response.data.data;
-                    this.states.ready = true
                 }.bind(this))
                 .catch(function (response) {
+                    if(response.response.data.message && response.response.data.message === 'Unauthenticated.')
+                        return this.session.user = null;
+
                     let errors = response.data.data.error;
                     if ((typeof errors) === "string")
                         errors = {errors};
                     swal.close();
                     this.swalMessage("error", errors);
+                }.bind(this))
+                .then(function () {
+                    this.states.ready= true;
                 }.bind(this))
         }
     },
