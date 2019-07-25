@@ -29,7 +29,7 @@
                 </td>
                 <td class="px-2 text-xs-left">{{ props.item.roles_label }}</td>
                 <td class="px-2 text-xs-left">{{ props.item.permissions_label }}</td>
-                <td class="px-2 text-xs-left">{{ props.item.social_buttons }}</td>
+                <td class="px-2 text-xs-left" v-html="props.item.social_buttons"></td>
                 <td class="px-2 text-xs-left">{{ props.item.updated_at }}</td>
                 <td class="px-2 justify-center layout px-0">
                     <user-table-actions :user="props.item" />

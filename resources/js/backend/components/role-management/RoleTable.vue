@@ -178,7 +178,8 @@
 
                 }.bind(this));
             },
-            fetchRoles(){
+            async fetchRoles(){
+                await this.$nextTick();
                 this.swalLoader();
                 this.states.isLoading = true;
                 let uri;

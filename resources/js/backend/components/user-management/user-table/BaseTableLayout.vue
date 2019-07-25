@@ -147,7 +147,8 @@
         },
         methods: {
 
-            fetchUsers(){
+            async fetchUsers(){
+                await this.$nextTick();
                 this.swalLoader();
                 this.states.isLoading = true;
                 let uri;

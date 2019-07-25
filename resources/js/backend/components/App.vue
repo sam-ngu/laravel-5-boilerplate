@@ -1,11 +1,8 @@
 <template>
-    <v-app :dark="dark">
-        <layout-master :disable-sidebar="showSidebar" v-if="messageBus.isReady()">
-            <v-breadcrumbs :items="breadcrumbItems" divider=">"></v-breadcrumbs>
-            <router-view></router-view>
-        </layout-master>
-        <loading-eclipse v-if="!messageBus.isReady()"></loading-eclipse>
-    </v-app>
+    <layout-master :disable-sidebar="showSidebar" >
+        <v-breadcrumbs :items="breadcrumbItems" divider=">"></v-breadcrumbs>
+        <router-view></router-view>
+    </layout-master>
 </template>
 
 <script>
@@ -22,9 +19,7 @@
         },
         data(){
             return{
-                dark: false,
                 breadcrumbItems : this.$route.meta.breadcrumb,
-                messageBus: MessageBus,
             }
         },
         props: {
@@ -60,9 +55,6 @@
 
         },
         mounted(){
-            EventBus.$on('toggled-dark', function () {
-                this.dark = !this.dark;
-            }.bind(this));
 
             MessageBus.setSession(this.session);
 
@@ -74,9 +66,6 @@
                     name: routeName
                 })
             }
-
-
-
 
 
         }

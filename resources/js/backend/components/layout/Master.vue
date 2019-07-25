@@ -1,14 +1,19 @@
 <template>
     <div>
-        <logged-in-as-alert/>
+        <v-app :dark="dark" v-if="messageBus.isReady()">
 
-        <sidebar v-if="!disableSidebar" v-model="showSidebar"></sidebar>
+            <logged-in-as-alert/>
 
-        <navbar v-if="!disableSidebar" @toggled-sidebar="showSidebar=!showSidebar"></navbar>
+            <sidebar v-if="!disableSidebar" v-model="showSidebar"></sidebar>
 
-        <v-content>
-            <slot></slot>
-        </v-content>
+            <navbar v-if="!disableSidebar" @toggled-sidebar="showSidebar=!showSidebar"></navbar>
+
+            <v-content>
+                <slot></slot>
+            </v-content>
+        </v-app>
+
+        <loading-eclipse v-else></loading-eclipse>
     </div>
 
 </template>
@@ -17,15 +22,19 @@
     import Sidebar from "./sidebar/BaseSidebar";
     import Navbar from "./NavBar";
     import {EventBus} from "../../../vue-tools/event-bus";
+    import {MessageBus} from "../../../vue-tools/message-bus";
     import LoggedInAsAlert from "./LoggedInAsAlert";
+    import LoadingEclipse from "../../../vue-tools/LoadingEclipse";
 
 
     export default {
         name: "layout-master",
-        components: {LoggedInAsAlert, Navbar, Sidebar},
+        components: {LoadingEclipse, LoggedInAsAlert, Navbar, Sidebar},
         data() {
             return {
+                dark: false,
                 showSidebar: null,
+                messageBus: MessageBus,
             }
         },
         props: {
@@ -38,6 +47,10 @@
 
         },
         mounted() {
+            EventBus.$on('toggled-dark', function () {
+                this.dark = !this.dark;
+            }.bind(this));
+
             EventBus.$on('toggled-sidebar', function () {
                 this.showSidebar = !this.showSidebar;
             }.bind(this))
