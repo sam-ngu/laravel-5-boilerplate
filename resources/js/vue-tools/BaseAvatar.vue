@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        name: "AdorableAvatar",
+        name: "BaseAvatar",
         data() {
             return {}
         },

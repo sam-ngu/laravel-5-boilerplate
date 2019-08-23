@@ -6,7 +6,7 @@
         >
             <v-card-title>
                 <v-layout row justify-space-start>
-                    <adorable-avatar :size="htmlAttr.avatarSize" :name="data.first_name" :avatar-location="data.avatar_location" />
+                    <base-avatar :size="htmlAttr.avatarSize" :name="data.first_name" :avatar-location="data.avatar_location" />
 
                     <div>
                         <h5>Status:
@@ -132,12 +132,12 @@
 <script>
     import SwalMixin from "../../../../mixins/SwalMixin";
     import {EventBus} from "../../../../vue-tools/event-bus";
-    import AdorableAvatar from "../../../../vue-tools/AdorableAvatar";
+    import BaseAvatar from "../../../../vue-tools/BaseAvatar";
 
     export default {
         name: "UserUpdateForm",
         mixins: [SwalMixin],
-        components: {AdorableAvatar},
+        components: {BaseAvatar},
         data() {
             return {
                 htmlAttr: {
