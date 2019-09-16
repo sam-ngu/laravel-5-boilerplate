@@ -1,8 +1,6 @@
 <template>
     <v-row align="center" justify="center" >
 
-
-
         <v-menu offset-y left>
             <template v-slot:activator="{on: menu}">
                 <div v-on="{...menu}">

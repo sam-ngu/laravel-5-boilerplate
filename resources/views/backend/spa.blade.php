@@ -21,6 +21,7 @@
 
 {{--vue js instance--}}
 <div id="app">
+
     <app session="{{ json_encode(array_only(session()->all(), ['admin_user_id', 'admin_user_name', 'temp_user_id']) )  }}"></app>
 </div>
 

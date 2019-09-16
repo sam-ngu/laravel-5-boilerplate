@@ -18,14 +18,11 @@
             <div class="sidebar-content">
                 <slot name="content"></slot>
             </div>
-
         </nav>
-
 
         <transition name="fade">
             <div v-if="value" @click="dismiss" class="overlay"></div>
         </transition>
-
 
     </div>
 
@@ -37,7 +34,6 @@
         name: "collapsible-sidebar",
         data(){
             return {
-                // showSidebarMutable: false,
             }
         },
 
@@ -47,22 +43,11 @@
             },
 
         },
-
         computed:{
-            // showSidebarComputed: {
-            //     get() {
-            //         // this.showSidebarMutable = this.showSidebar;
-            //         return this.showSidebar;
-            //     },
-            //     // set(value) {
-            //     //     this.showSidebarMutable = value;
-            //     // }
-            // }
         },
 
         methods: {
             dismiss(){
-                // this.showSidebarMutable = false;
                 this.$emit('dismiss-sidebar');
                 this.$emit('input', false)
             }
