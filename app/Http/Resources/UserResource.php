@@ -18,6 +18,7 @@ class UserResource extends JsonResource
             'id' => data_get($this, 'id'),
             'first_name' => data_get($this, 'first_name'),
             'last_name' => data_get($this, 'last_name'),
+            'full_name' => data_get($this, 'full_name'),
             'email' => data_get($this, 'email'),
             'avatar_type' => data_get($this, 'avatar_type'),
             'avatar_location' => data_get($this, 'avatar_location'),

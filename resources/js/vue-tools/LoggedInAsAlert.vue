@@ -5,7 +5,7 @@
         :value="true"
         color="purple"
         icon="info"
-        outline
+        outlined
     >
         You are currently logged in as {{ session.user.first_name + ' ' + session.user.last_name }}.
         <a href="/logout-as">Re-Login as {{session.session.admin_user_name}}</a>.
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-    import {MessageBus} from "../../../vue-tools/message-bus";
+    import {MessageBus} from "./message-bus";
 
     export default {
         name: "LoggedInAsAlert",
@@ -41,5 +41,6 @@
         bottom: 0px;
         right: 0px;
         position: absolute;
+        z-index: 99;
     }
 </style>

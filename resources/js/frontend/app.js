@@ -12,6 +12,7 @@ import Vuetify from "vuetify";
 import VueRouter from "vue-router";
 import vuetifyopt from "../vuetifyopt";
 import routes from './routes/routes'
+import FrontendDashboard from "./components/dashboard/FrontendDashboard";
 
 window.Vue = Vue;
 
@@ -27,10 +28,11 @@ Vue.use(VueRouter)
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('frontend-dashboard', FrontendDashboard);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -23,7 +23,7 @@
     import Navbar from "./NavBar";
     import {EventBus} from "../../../vue-tools/event-bus";
     import {MessageBus} from "../../../vue-tools/message-bus";
-    import LoggedInAsAlert from "./LoggedInAsAlert";
+    import LoggedInAsAlert from "../../../vue-tools/LoggedInAsAlert";
     import LoadingEclipse from "../../../vue-tools/LoadingEclipse";
 
 
