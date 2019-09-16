@@ -3,10 +3,10 @@
         :headers="headers"
         :items="data"
         :loading="isLoading"
-        hide-actions
+        hide-default-footer
         class="elevation-3"
     >
-        <template slot="items" slot-scope="props">
+        <template v-slot:item="props">
             <tr>
                 <td class="px-2 text-left" >
                     <router-link :to="{

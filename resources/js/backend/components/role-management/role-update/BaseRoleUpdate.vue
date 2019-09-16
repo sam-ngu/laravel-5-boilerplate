@@ -1,5 +1,5 @@
 <template>
-    <collapsible-sidebar :show-sidebar="show" @dismiss-sidebar="back">
+    <collapsible-sidebar v-model="show" @dismiss-sidebar="back">
         <template slot="header">
             {{titleCase(data.name)}}
         </template>
@@ -23,7 +23,9 @@
         mixins: [SwalMixin, StringHelperMixin],
         data() {
             return {
+
                 show: false,
+
             }
         },
         props: {

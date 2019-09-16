@@ -10,21 +10,11 @@
                     <button-tooltip
                         tooltip="Add new user"
                         icon="add"
-                        @click="() => $router.push({name: 'user-create'})"
+                        :to="{
+                            name: 'user-create',
+                        }"
+
                     />
-<!--                    <v-tooltip bottom class="ml-auto">-->
-<!--                        <template slot="activator">-->
-<!--                            <v-btn-->
-<!--                                icon-->
-<!--                                color="success"-->
-<!--                                class="no-underline"-->
-<!--                                :to="{-->
-<!--                                    name: 'user-create',-->
-<!--                                }"-->
-<!--                            ><v-icon>add</v-icon></v-btn>-->
-<!--                        </template>-->
-<!--                        <span>Add new user</span>-->
-<!--                    </v-tooltip>-->
                 </v-toolbar>
             </v-col>
         </v-row>
@@ -38,8 +28,6 @@
                     v-model="searchKeywords"></v-text-field>
             </v-col>
         </v-row>
-
-
 
         <v-row>
             <v-col>
@@ -72,7 +60,7 @@
             </v-col>
         </v-row>
         <v-divider></v-divider>
-        <v-row justify-space-between>
+        <v-row justify="space-between">
 
             <div>
                 <v-pagination

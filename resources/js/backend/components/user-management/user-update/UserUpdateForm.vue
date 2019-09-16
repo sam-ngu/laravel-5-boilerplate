@@ -5,30 +5,39 @@
             class="mb-12 pa-12"
         >
             <v-card-title>
-                <v-row justify-space-start>
-                    <base-avatar :size="htmlAttr.avatarSize" :name="data.first_name" :avatar-location="data.avatar_location" />
+                <v-row justify="space-start">
+                    <v-col>
+                        <base-avatar :size="htmlAttr.avatarSize" :name="data.first_name" :avatar-location="data.avatar_location" />
+                    </v-col>
 
-                    <div>
-                        <h5>Status:
-                            <v-chip
-                                    small
-                                    :color="data.active ? 'success' : 'error'"
-                                    text-color="white">
-                                {{data.active ? 'Active' : 'Inactive'}}
-                            </v-chip>
-                        </h5>
-                        <h5>Confirmed:
-                            <v-chip small :color="data.confirmed_label ? 'success' : 'error'" text-color="white">{{
-                                data.confirmed_label ? 'Yes' : 'No'
-                                }}</v-chip>
-                        </h5>
-                    </div>
-                    <div>
-                        <h5>Timezone: {{data.timezone ? data.timezone : 'Default'}}</h5>
-                        <h5>Last login at: {{data.last_login_at ? data.last_login_at : 'N/A'}}</h5>
-                        <h5>Last login IP: {{data.last_login_ip ? data.last_login_ip : 'N/A'}}</h5>
+                    <v-col>
 
-                    </div>
+                        <div>
+                            <h5>Status:
+                                <v-chip
+                                        small
+                                        :color="data.active ? 'success' : 'error'"
+                                        text-color="white">
+                                    {{data.active ? 'Active' : 'Inactive'}}
+                                </v-chip>
+                            </h5>
+                            <h5>Confirmed:
+                                <v-chip small :color="data.confirmed_label ? 'success' : 'error'" text-color="white">{{
+                                    data.confirmed_label ? 'Yes' : 'No'
+                                    }}</v-chip>
+                            </h5>
+                        </div>
+                    </v-col>
+
+                    <v-col>
+                        <div>
+                            <h5>Timezone: {{data.timezone ? data.timezone : 'Default'}}</h5>
+                            <h5>Last login at: {{data.last_login_at ? data.last_login_at : 'N/A'}}</h5>
+                            <h5>Last login IP: {{data.last_login_ip ? data.last_login_ip : 'N/A'}}</h5>
+
+                        </div>
+
+                    </v-col>
 
 
                 </v-row>

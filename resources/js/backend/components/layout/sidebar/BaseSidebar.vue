@@ -40,18 +40,24 @@
                     prepend-icon="account_circle"
                     value="true"
             >
-                <v-list-item slot="activator">
-                    <v-list-item-title>Users</v-list-item-title>
-                </v-list-item>
+                <template v-slot:activator>
+
+                    <v-list-item >
+                        <v-list-item-title>Users</v-list-item-title>
+                    </v-list-item>
+                </template>
 
                 <v-list-group
                         no-action
                         sub-group
                         value="true"
                 >
-                    <v-list-item slot="activator">
-                        <v-list-item-title>Access</v-list-item-title>
-                    </v-list-item>
+                    <template v-slot:activator>
+
+                        <v-list-item>
+                            <v-list-item-title>Access</v-list-item-title>
+                        </v-list-item>
+                    </template>
 
                     <sidebar-list-tile
                         v-for="(admin, i) in admins"
@@ -60,18 +66,6 @@
                         :icon="admin.icon"
                         :title="admin.name"
                     />
-
-                    <!--<v-list-item-->
-                            <!--v-for="(admin, i) in admins"-->
-                            <!--:key="i"-->
-                            <!--@click=""-->
-                            <!--:to="admin.to"-->
-                    <!--&gt;-->
-                        <!--<v-list-item-title v-text="admin.name"></v-list-item-title>-->
-                        <!--<v-list-item-action >-->
-                            <!--<v-icon v-text="admin.icon"></v-icon>-->
-                        <!--</v-list-item-action>-->
-                    <!--</v-list-item>-->
 
                 </v-list-group>
             </v-list-group>

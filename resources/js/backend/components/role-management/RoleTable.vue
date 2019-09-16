@@ -7,19 +7,29 @@
 
                     <v-spacer></v-spacer>
 
-                    <v-tooltip bottom class="ml-auto">
-                        <template slot="activator">
-                            <v-btn
-                                icon
-                                class="no-underline"
-                                color="success"
-                                :to="{
+                    <button-tooltip
+                        icon="add"
+                        tooltip="Add new role"
+                        :to="{
                                     name: 'role-create',
                                 }"
-                            ><v-icon>add</v-icon></v-btn>
-                        </template>
-                        <span>Add new role</span>
-                    </v-tooltip>
+                    />
+
+<!--                    <v-tooltip bottom class="ml-auto">-->
+<!--                        <template slot="activator">-->
+<!--                            <v-btn-->
+<!--                                icon-->
+<!--                                class="no-underline"-->
+<!--                                color="success"-->
+<!--                                :to="{-->
+<!--                                    name: 'role-create',-->
+<!--                                }"-->
+<!--                            ><v-icon>add</v-icon></v-btn>-->
+<!--                        </template>-->
+<!--                        <span>Add new role</span>-->
+<!--                    </v-tooltip>-->
+
+
                 </v-toolbar>
             </v-col>
         </v-row>
@@ -30,10 +40,10 @@
                     :headers="headers"
                     :items="data.roles"
                     :loading="states.isLoading"
-                    hide-actions
+                    hide-default-footer
                     class="elevation-3"
                 >
-                    <template slot="items" slot-scope="props">
+                    <template v-slot:item="props">
                         <tr>
                             <td class="px-2 text-left" >
                                 <router-link
@@ -63,16 +73,25 @@
                             <td class="px-2 text-left">{{ String(props.item.user_num) }}</td>
                             <td class="px-2 justify-center layout px-0">
                                 <v-row  align-center justify-center fill-height>
-                                    <v-tooltip bottom v-if="props.item.name!=='administrator'">
-                                        <v-icon
-                                            slot="activator"
-                                            small
-                                            @click="deleteItem(props.item)"
-                                        >
-                                            delete
-                                        </v-icon>
-                                        <span>Delete</span>
-                                    </v-tooltip>
+
+                                    <button-tooltip
+                                        v-if="props.item.name!=='administrator'"
+                                        tooltip="Delete"
+                                        icon="delete"
+                                        small
+                                        @click="deleteItem(props.item)"
+                                    />
+
+<!--                                    <v-tooltip bottom v-if="props.item.name!=='administrator'">-->
+<!--                                        <v-icon-->
+<!--                                            slot="activator"-->
+<!--                                            small-->
+<!--                                            @click="deleteItem(props.item)"-->
+<!--                                        >-->
+<!--                                            delete-->
+<!--                                        </v-icon>-->
+<!--                                        <span>Delete</span>-->
+<!--                                    </v-tooltip>-->
                                     <div v-else>N/A</div>
                                 </v-row>
                             </td>
@@ -92,7 +111,7 @@
             </v-col>
         </v-row>
         <v-divider></v-divider>
-        <v-row justify-space-between>
+        <v-row justify="space-between">
 
             <div>
                 <v-pagination
@@ -118,8 +137,6 @@
             </div>
         </v-row>
 
-
-
     </v-container>
 </template>
 
@@ -127,10 +144,11 @@
     import {EventBus} from "../../../vue-tools/event-bus";
     import SwalMixin from "../../../mixins/SwalMixin";
     import StringHelperMixin from "../../../mixins/StringHelperMixin";
+    import ButtonTooltip from "../../../vue-tools/ButtonTooltip";
 
     export default {
         name: "RoleTable",
-        components: {},
+        components: {ButtonTooltip},
         mixins: [SwalMixin, StringHelperMixin],
         data() {
             return {

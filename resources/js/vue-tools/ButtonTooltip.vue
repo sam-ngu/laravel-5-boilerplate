@@ -11,6 +11,7 @@
                     :small="small"
                     :icon="!!icon"
                     :disabled="disabled"
+                    :to="to"
                 >
                     <v-icon v-if="icon">{{icon}}</v-icon>
                     {{btnText}}
@@ -51,6 +52,10 @@
             disabled: {
                 type: Boolean,
                 default: false,
+            },
+            to: {
+                type: String | Object,
+                default: null
             }
 
         },

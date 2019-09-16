@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper" >
 
-        <nav id="sidebar" :class="{'active': showSidebar}">
+        <nav id="sidebar" :class="{'active': value}">
         <!--<nav id="sidebar">-->
             <!-- Close Sidebar Button -->
             <!--<div id="dismiss" @click="dismiss">-->
@@ -23,7 +23,7 @@
 
 
         <transition name="fade">
-            <div v-if="showSidebar" @click="dismiss" class="overlay"></div>
+            <div v-if="value" @click="dismiss" class="overlay"></div>
         </transition>
 
 
@@ -63,7 +63,7 @@
         methods: {
             dismiss(){
                 // this.showSidebarMutable = false;
-                // this.$emit('dismiss-sidebar');
+                this.$emit('dismiss-sidebar');
                 this.$emit('input', false)
             }
 

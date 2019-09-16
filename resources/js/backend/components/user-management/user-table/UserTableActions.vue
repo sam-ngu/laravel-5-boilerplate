@@ -1,22 +1,18 @@
 <template>
-    <v-row align-center justify-center fill-height>
+    <v-row align="center" justify="center" >
 
 
 
         <v-menu offset-y left>
-            <v-tooltip
-                bottom
-                slot="activator"
-            >
-                <v-icon
-                    slot="activator"
-                    small
-                    class="mr-2"
-                >
-                    more_vert
-                </v-icon>
-                <span>More</span>
-            </v-tooltip>
+            <template v-slot:activator="{on: menu}">
+                <div v-on="{...menu}">
+                    <button-tooltip
+                        icon="more_vert"
+                        tooltip="More"
+                        small
+                    />
+                </div>
+            </template>
             <v-list>
                 <v-list-item
                     v-for="(item, index) in listItems"
@@ -30,16 +26,12 @@
             </v-list>
         </v-menu>
 
-        <v-tooltip bottom>
-            <v-icon
-                slot="activator"
-                small
-                @click="deleteItem"
-            >
-                delete
-            </v-icon>
-            <span>Delete</span>
-        </v-tooltip>
+        <button-tooltip
+            @click="deleteItem"
+            tooltip="Delete"
+            small
+            icon="delete"
+        />
     </v-row>
 
 
@@ -49,11 +41,12 @@
     import {MessageBus} from "../../../../vue-tools/message-bus";
     import {EventBus} from "../../../../vue-tools/event-bus";
     import SwalMixin from "../../../../mixins/SwalMixin";
+    import ButtonTooltip from "../../../../vue-tools/ButtonTooltip";
 
     export default {
         name: "UserTableActions",
         mixins: [SwalMixin],
-        components: {},
+        components: {ButtonTooltip},
         data() {
             return {}
         },
@@ -141,10 +134,11 @@
                 }.bind(this))
             },
             deleteItem(){
-                this.swalLoader();
                 let uri;
 
                 this.swalConfirm("", function(){
+                    this.swalLoader();
+
                     if(this.isActive || this.isDeactivated){
                         uri = '/api/v1/users/' + String(this.user.id);
                         this.callApi(uri, 'delete')

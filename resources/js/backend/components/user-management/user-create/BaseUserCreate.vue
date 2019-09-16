@@ -1,5 +1,5 @@
 <template>
-    <collapsible-sidebar v-model="states.show">
+    <collapsible-sidebar v-model="show" @dismiss-sidebar="back">
         <template slot="header">
             <h1>Create User</h1>
         </template>
@@ -28,9 +28,7 @@
         components: {UserCreateForm, CollapsibleSidebar},
         data() {
             return {
-                states: {
-                    show: false,
-                }
+                show: false,
             }
         },
         props: {},
