@@ -3,24 +3,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
-// import 'vuetify/dist/vuetify.min.css'
-// import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
 import './../bootstrap'
 import './../plugins'
 import App from './components/App.vue'
-import Routes from './routes/routes'
+import routes from './routes/routes'
+import vuetifyopt from "../vuetifyopt";
 
 window.Vue = Vue;
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 Vue.use(Vuetify);
-
-
-
-
-
-
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -31,6 +24,7 @@ Vue.use(Vuetify);
 Vue.component('app', App);
 
 const app = new Vue({
+    vuetify: new Vuetify(vuetifyopt),
     el: '#app',
-    router: Routes,
+    router: routes,
 });

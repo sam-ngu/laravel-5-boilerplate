@@ -6,8 +6,8 @@ import _ from 'lodash'
 import axios from 'axios'
 import swal from 'sweetalert2';
 import $ from 'jquery';
-import 'popper.js/dist/umd/popper'; // Required for BS4
-import 'bootstrap';
+// import 'popper.js/dist/umd/popper'; // Required for BS4
+// import 'bootstrap';
 
 /**
  * Font Awesome >=5.1

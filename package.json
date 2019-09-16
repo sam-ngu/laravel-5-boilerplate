@@ -17,6 +17,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.2.0",
     "@fortawesome/free-regular-svg-icons": "^5.2.0",
     "@fortawesome/free-solid-svg-icons": "^5.2.0",
+    "@mdi/font": "^4.4.95",
     "@vue/test-utils": "^1.0.0-beta.29",
     "axios": "^0.18",
     "bootstrap": "^4.0.0",
@@ -78,6 +79,6 @@
     "vue-loader": "^15.7.0",
     "vue-router": "^3.0.2",
     "vue-template-es2015-compiler": "1.6.*",
-    "vuetify": "^1.5.0"
+    "vuetify": "^2.0.17"
   }
 }

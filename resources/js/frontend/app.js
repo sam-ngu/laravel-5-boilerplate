@@ -8,8 +8,16 @@
 import '../bootstrap';
 import '../plugins';
 import Vue from 'vue';
+import Vuetify from "vuetify";
+import VueRouter from "vue-router";
+import vuetifyopt from "../vuetifyopt";
+import routes from './routes/routes'
 
 window.Vue = Vue;
+
+Vue.config.productionTip = false;
+Vue.use(Vuetify)
+Vue.use(VueRouter)
 
 /**
  * The following block of code may be used to automatically register your
@@ -31,5 +39,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
  */
 
 const app = new Vue({
-    el: '#app'
+    vuetify: new Vuetify(vuetifyopt),
+    el: '#app',
+    router: routes
 });
