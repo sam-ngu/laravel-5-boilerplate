@@ -17,7 +17,8 @@ class CreateRoleTest extends TestCase
     {
         $this->loginAsAdmin();
 
-        $this->get('/admin/auth/role/create')->assertStatus(200);
+        $response = $this->get('/admin/auth/role/create');
+        $response->assertStatus(200);
     }
 
     /** @test */
@@ -55,7 +56,7 @@ class CreateRoleTest extends TestCase
     {
         $this->loginAsAdmin();
 
-        $this->post('/admin/auth/role', ['name' => 'new role', 'permissions' => ['view backend']]);
+        $response = $this->post('/admin/auth/role', ['name' => 'new role', 'permissions' => ['view backend']]);
 
         $role = Role::where(['name' => 'new role'])->first();
 

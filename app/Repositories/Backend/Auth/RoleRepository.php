@@ -47,7 +47,7 @@ class RoleRepository extends BaseRepository
         return DB::transaction(function () use ($data) {
             $role = parent::create([
                 'name' => strtolower($data['name']),
-                'guard_name' => strtolower($data['guard_name']), // to explicitly pass guard name to spatie permission, incase of using api request
+                'guard_name' => strtolower(data_get($data, 'guard_name', config('auth.defaults.guard'))), // to explicitly pass guard name to spatie permission, incase of using api request
             ]);
 
             if ($role) {
