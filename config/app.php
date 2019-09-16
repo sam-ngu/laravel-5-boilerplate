@@ -181,7 +181,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        App\Providers\BladeServiceProvider::class,
+//        App\Providers\BladeServiceProvider::class, // will cause problem in laravel 5.8
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         App\Providers\EventServiceProvider::class,
