@@ -1,43 +1,48 @@
 <template>
     <v-container>
-        <v-layout row>
-            <v-flex>
+        <v-row>
+            <v-col>
                 <v-toolbar flat>
                     <v-toolbar-title>User Management</v-toolbar-title>
 
                     <v-spacer></v-spacer>
 
-                    <v-tooltip bottom class="ml-auto">
-                        <template slot="activator">
-                            <v-btn
-                                icon
-                                color="success"
-                                class="no-underline"
-                                :to="{
-                                    name: 'user-create',
-                                }"
-                            ><v-icon>add</v-icon></v-btn>
-                        </template>
-                        <span>Add new user</span>
-                    </v-tooltip>
+                    <button-tooltip
+                        tooltip="Add new user"
+                        icon="add"
+                        @click="() => $router.push({name: 'user-create'})"
+                    />
+<!--                    <v-tooltip bottom class="ml-auto">-->
+<!--                        <template slot="activator">-->
+<!--                            <v-btn-->
+<!--                                icon-->
+<!--                                color="success"-->
+<!--                                class="no-underline"-->
+<!--                                :to="{-->
+<!--                                    name: 'user-create',-->
+<!--                                }"-->
+<!--                            ><v-icon>add</v-icon></v-btn>-->
+<!--                        </template>-->
+<!--                        <span>Add new user</span>-->
+<!--                    </v-tooltip>-->
                 </v-toolbar>
-            </v-flex>
-        </v-layout>
+            </v-col>
+        </v-row>
 
-        <v-layout row> <!--search bar-->
-            <v-flex>
+        <v-row> <!--search bar-->
+            <v-col>
                 <v-text-field
-                    class="pl-2 pr-5"
+                    class="pl-2 pr-12"
                     append-icon="fas fa-search"
                     label="Search"
                     v-model="searchKeywords"></v-text-field>
-            </v-flex>
-        </v-layout>
+            </v-col>
+        </v-row>
 
 
 
-        <v-layout row>
-            <v-flex>
+        <v-row>
+            <v-col>
 
                 <v-tabs fixed-tabs
                         v-model="tab"
@@ -55,16 +60,19 @@
                     :data="data.users"
                     :is-loading="states.isLoading"
                 ></user-table>
-            </v-flex>
-        </v-layout>
+            </v-col>
+        </v-row>
 
-        <v-layout column>
-            <div class="pt-3">
-                <h5>Total: {{apiMeta.total}}</h5>
-            </div>
-        </v-layout>
+        <v-row >
+            <v-col>
+
+                <div class="pt-4">
+                    <h5>Total: {{apiMeta.total}}</h5>
+                </div>
+            </v-col>
+        </v-row>
         <v-divider></v-divider>
-        <v-layout row justify-space-between>
+        <v-row justify-space-between>
 
             <div>
                 <v-pagination
@@ -88,7 +96,7 @@
                     style="width: 150px;"
                 ></v-select>
             </div>
-        </v-layout>
+        </v-row>
 
 
     </v-container>
@@ -99,10 +107,11 @@
     import SwalMixin from "../../../../mixins/SwalMixin";
     import UserTable from "./UserTable";
     import StringHelperMixin from "../../../../mixins/StringHelperMixin";
+    import ButtonTooltip from "../../../../vue-tools/ButtonTooltip";
 
     export default {
         name: "BaseTableLayout",
-        components: {UserTable},
+        components: {ButtonTooltip, UserTable},
         mixins: [SwalMixin, StringHelperMixin],
         data() {
             return {

@@ -1,5 +1,5 @@
 <template>
-    <v-list-item :to="to">
+    <v-list-item :href="href" :to="to" :color="color">
         <v-list-item-action>
             <v-icon>{{icon}}</v-icon>
         </v-list-item-action>
@@ -12,15 +12,23 @@
         name: "SidebarListTile",
         props: {
             to: {
-                default: "#",
+                default: undefined,
                 type: Object | String,
             },
+            href:{
+                type: String,
+                default: undefined,
+            },
             icon: {
-                default: 'home',
+                default: '',
                 type: String,
             },
             title: {
                 required: true,
+                type: String,
+            },
+            color: {
+                default: '',
                 type: String,
             }
         }

@@ -1,7 +1,7 @@
 <template>
     <v-container>
 
-        <v-card class="pa-5 elevation-2">
+        <v-card class="pa-12 elevation-2">
 
             <v-form ref="form" v-model="states.is_form_valid" @submit.prevent="submitForm">
                 <v-text-field
@@ -43,8 +43,8 @@
 
                 <v-container>
                     <v-subheader>Roles</v-subheader>
-                    <v-layout row>
-                        <v-flex xs12 md6>
+                    <v-row >
+                        <v-col xs12 md6>
                             <v-card>
                                 <v-switch label="Administrator" v-model="inputData.roles.administrator"></v-switch>
                                 <v-card-text>
@@ -52,40 +52,40 @@
                                 </v-card-text>
 
                             </v-card>
-                        </v-flex>
-                        <v-flex xs12 md6>
+                        </v-col>
+                        <v-col xs12 md6>
                             <v-card>
                                 <v-switch label="Executive" v-model="inputData.roles.executive"></v-switch>
                                 <v-card-text>
                                     View-backend
                                 </v-card-text>
                             </v-card>
-                        </v-flex>
-                        <v-flex xs12 md6>
+                        </v-col>
+                        <v-col xs12 md6>
                             <v-card>
                                 <v-switch label="User" v-model="inputData.roles.user"></v-switch>
                                 <v-card-text>
                                     None
                                 </v-card-text>
                             </v-card>
-                        </v-flex>
-                    </v-layout>
+                        </v-col>
+                    </v-row>
                 </v-container>
 
                 <!--permission-->
 
                 <v-container>
                     <v-subheader>Permissions</v-subheader>
-                    <v-layout row>
-                        <v-flex xs12 md6>
+                    <v-row >
+                        <v-col xs12 md6>
                             <v-card>
                                 <v-switch label="View Backend" v-model="inputData.permissions.view_backend"></v-switch>
                                 <v-card-text>
                                     None
                                 </v-card-text>
                             </v-card>
-                        </v-flex>
-                    </v-layout>
+                        </v-col>
+                    </v-row>
                 </v-container>
 
 

@@ -2,7 +2,7 @@
     <v-container>
 
         <v-card
-            class="mb-5 pa-5"
+            class="mb-12 pa-12"
             v-if="!states.isLoading"
         >
             <v-card-title>
@@ -22,8 +22,8 @@
 
                 <v-container>
                     <v-subheader>Associated Permission</v-subheader>
-                    <v-layout row>
-                        <v-flex xs12 md6 v-for="(item, index) in permissions" :key="index">
+                    <v-row>
+                        <v-col xs12 md6 v-for="(item, index) in permissions" :key="index">
                             <v-card>
                                 <v-switch
                                     :label="titleCase(item.name)"
@@ -32,8 +32,8 @@
                                 </v-switch>
 
                             </v-card>
-                        </v-flex>
-                    </v-layout>
+                        </v-col>
+                    </v-row>
                 </v-container>
             </v-form>
         </v-card>

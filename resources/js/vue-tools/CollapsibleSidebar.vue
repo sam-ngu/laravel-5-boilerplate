@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper" >
 
-        <nav id="sidebar" :class="{'active': showSidebarComputed}">
+        <nav id="sidebar" :class="{'active': showSidebar}">
         <!--<nav id="sidebar">-->
             <!-- Close Sidebar Button -->
             <!--<div id="dismiss" @click="dismiss">-->
@@ -23,7 +23,7 @@
 
 
         <transition name="fade">
-            <div v-if="showSidebarComputed" @click="()=>{dismiss()}" class="overlay"></div>
+            <div v-if="showSidebar" @click="dismiss" class="overlay"></div>
         </transition>
 
 
@@ -37,35 +37,34 @@
         name: "collapsible-sidebar",
         data(){
             return {
-                showSidebarMutable: false,
+                // showSidebarMutable: false,
             }
         },
 
         props:{
-            showSidebar: {
+            value: {
                 type: Boolean,
-                required: true,
-
             },
 
         },
 
         computed:{
-            showSidebarComputed: {
-                get() {
-                    this.showSidebarMutable = this.showSidebar;
-                    return this.showSidebarMutable;
-                },
-                set(value) {
-                    this.showSidebarMutable = value;
-                }
-            }
+            // showSidebarComputed: {
+            //     get() {
+            //         // this.showSidebarMutable = this.showSidebar;
+            //         return this.showSidebar;
+            //     },
+            //     // set(value) {
+            //     //     this.showSidebarMutable = value;
+            //     // }
+            // }
         },
 
         methods: {
             dismiss(){
-                this.showSidebarMutable = false;
-                this.$emit('dismiss-sidebar');
+                // this.showSidebarMutable = false;
+                // this.$emit('dismiss-sidebar');
+                this.$emit('input', false)
             }
 
         }

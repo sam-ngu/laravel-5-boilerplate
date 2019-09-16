@@ -1,7 +1,7 @@
 <template>
     <v-container>
-        <v-layout row>
-            <v-flex>
+        <v-row >
+            <v-col>
                 <v-toolbar flat>
                     <v-toolbar-title>Role Management</v-toolbar-title>
 
@@ -21,11 +21,11 @@
                         <span>Add new role</span>
                     </v-tooltip>
                 </v-toolbar>
-            </v-flex>
-        </v-layout>
+            </v-col>
+        </v-row>
 
-        <v-layout row>
-            <v-flex>
+        <v-row >
+            <v-col>
                 <v-data-table
                     :headers="headers"
                     :items="data.roles"
@@ -35,7 +35,7 @@
                 >
                     <template slot="items" slot-scope="props">
                         <tr>
-                            <td class="px-2 text-xs-left" >
+                            <td class="px-2 text-left" >
                                 <router-link
                                     v-if="props.item.name!=='administrator'"
                                     :to="{
@@ -50,7 +50,7 @@
                                 </router-link>
                                 <div v-else>{{titleCase(props.item.name)}}</div>
                             </td>
-                            <td class="px-2 text-xs-left">
+                            <td class="px-2 text-left">
                                 <!--if permission not empty-->
                                     <!--for each permissions, list the name-->
                                 <div v-if="!isEmpty(props.item.permission)">
@@ -60,9 +60,9 @@
                                 </div>
                                 <div v-else v-text="'N/A'"></div>
                             </td>
-                            <td class="px-2 text-xs-left">{{ String(props.item.user_num) }}</td>
+                            <td class="px-2 text-left">{{ String(props.item.user_num) }}</td>
                             <td class="px-2 justify-center layout px-0">
-                                <v-layout row align-center justify-center fill-height>
+                                <v-row  align-center justify-center fill-height>
                                     <v-tooltip bottom v-if="props.item.name!=='administrator'">
                                         <v-icon
                                             slot="activator"
@@ -74,22 +74,25 @@
                                         <span>Delete</span>
                                     </v-tooltip>
                                     <div v-else>N/A</div>
-                                </v-layout>
+                                </v-row>
                             </td>
                         </tr>
 
                     </template>
                 </v-data-table>
-            </v-flex>
-        </v-layout>
+            </v-col>
+        </v-row>
 
-        <v-layout column>
-            <div class="pt-3">
-                <h5>Total: {{apiMeta.total}}</h5>
-            </div>
-        </v-layout>
+        <v-row column>
+            <v-col>
+
+                <div class="pt-4">
+                    <h5>Total: {{apiMeta.total}}</h5>
+                </div>
+            </v-col>
+        </v-row>
         <v-divider></v-divider>
-        <v-layout row justify-space-between>
+        <v-row justify-space-between>
 
             <div>
                 <v-pagination
@@ -113,7 +116,7 @@
                     style="width: 150px;"
                 ></v-select>
             </div>
-        </v-layout>
+        </v-row>
 
 
 

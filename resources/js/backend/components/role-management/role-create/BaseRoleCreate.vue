@@ -1,17 +1,17 @@
 <template>
-    <collapsible-sidebar :show-sidebar="show" @dismiss-sidebar="back">
+    <collapsible-sidebar v-model="show"  @dismiss-sidebar="back">
         <template slot="header">
             <h1>Create Role</h1>
         </template>
 
         <template slot="content">
             <v-container>
-                <v-layout row>
-                    <v-flex>
+                <v-row >
+                    <v-col>
                         <role-create-form @role-created="back"></role-create-form>
 
-                    </v-flex>
-                </v-layout>
+                    </v-col>
+                </v-row>
             </v-container>
         </template>
 

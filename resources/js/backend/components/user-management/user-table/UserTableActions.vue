@@ -1,5 +1,5 @@
 <template>
-    <v-layout row align-center justify-center fill-height>
+    <v-row align-center justify-center fill-height>
 
 
 
@@ -18,15 +18,15 @@
                 <span>More</span>
             </v-tooltip>
             <v-list>
-                <v-list-tile
+                <v-list-item
                     v-for="(item, index) in listItems"
                     :key="index"
                     :disabled="item.disabled"
                     @click="item.action.call()"
                     v-show="item.show"
                 >
-                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                </v-list-tile>
+                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
             </v-list>
         </v-menu>
 
@@ -40,7 +40,7 @@
             </v-icon>
             <span>Delete</span>
         </v-tooltip>
-    </v-layout>
+    </v-row>
 
 
 </template>

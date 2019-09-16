@@ -8,7 +8,7 @@
     >
         <template slot="items" slot-scope="props">
             <tr>
-                <td class="px-2 text-xs-left" >
+                <td class="px-2 text-left" >
                     <router-link :to="{
                                     name: 'user-show',
                                     params: {
@@ -20,17 +20,17 @@
                         {{ props.item.last_name }}
                     </router-link>
                 </td>
-                <td class="px-2 text-xs-left">{{ props.item.first_name }}</td>
-                <td class="px-2 text-xs-left">{{ props.item.email }}</td>
-                <td class="px-2 text-xs-left">
+                <td class="px-2 text-left">{{ props.item.first_name }}</td>
+                <td class="px-2 text-left">{{ props.item.email }}</td>
+                <td class="px-2 text-left">
                     <v-chip text-color="white" :color="props.item.confirmed_label ? 'green' : 'red'">
                         {{ props.item.confirmed_label ? 'Yes' : 'No' }}
                     </v-chip>
                 </td>
-                <td class="px-2 text-xs-left">{{ props.item.roles_label }}</td>
-                <td class="px-2 text-xs-left">{{ props.item.permissions_label }}</td>
-                <td class="px-2 text-xs-left" v-html="props.item.social_buttons"></td>
-                <td class="px-2 text-xs-left">{{ props.item.updated_at }}</td>
+                <td class="px-2 text-left">{{ props.item.roles_label }}</td>
+                <td class="px-2 text-left">{{ props.item.permissions_label }}</td>
+                <td class="px-2 text-left" v-html="props.item.social_buttons"></td>
+                <td class="px-2 text-left">{{ props.item.updated_at }}</td>
                 <td class="px-2 justify-center layout px-0">
                     <user-table-actions :user="props.item" />
                 </td>

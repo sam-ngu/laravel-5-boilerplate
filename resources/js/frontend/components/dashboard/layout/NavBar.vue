@@ -4,31 +4,23 @@
             clipped-left
             dense
             fixed
-            color="red darken-4">
+            color="light-blue darken-2">
         <v-app-bar-nav-icon @click="toggleSideBar"></v-app-bar-nav-icon>
 
-        <v-toolbar-title > <router-link class="white--text" style="text-decoration: none;" :to="{name: 'home'}">Boilerplate</router-link></v-toolbar-title>
+        <v-toolbar-title > <router-link class="white--text" style="text-decoration: none;" :to="{name: 'home'}">Acadea</router-link></v-toolbar-title>
 
         <v-spacer></v-spacer>
-
-        <v-btn icon>
-            <v-icon>search</v-icon>
-        </v-btn>
-
-        <v-btn icon>
-            <v-icon>apps</v-icon>
-        </v-btn>
 
         <v-btn @click="toggleDarkMode" icon>
             <v-icon :color="darkModeIconColor">brightness_3</v-icon>
         </v-btn>
 
         <v-menu offset-y left>
-            <template v-slot:activator="{on: menu}">
-
-                <div v-on="{...menu}">
-
-                    <v-btn icon>
+            <template v-slot:activator="{on}">
+                <div v-on="on">
+                    <v-btn
+                        icon
+                    >
                         <v-icon>more_vert</v-icon>
                     </v-btn>
                 </div>
@@ -48,7 +40,7 @@
 </template>
 
 <script>
-    import {EventBus} from "../../../vue-tools/event-bus";
+    import {EventBus} from "../../../../vue-tools/event-bus";
 
     export default {
         name: "navbar",
@@ -58,7 +50,6 @@
                 dark: false,
 
                 menuItems: [
-                    {title: 'Control', action: this.control},
                     {title: 'Logout', action: this.logout}
                 ]
             }
@@ -81,11 +72,7 @@
             logout(){
                 window.location.href = '/logout';
             },
-            control(){
-                this.$router.push({
-                    name: 'control',
-                })
-            }
+
 
         },
         mounted() {

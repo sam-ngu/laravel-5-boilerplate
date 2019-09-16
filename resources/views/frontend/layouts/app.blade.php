@@ -24,13 +24,9 @@
     </head>
     <body>
         <div id="app">
-            @include('includes.partials.logged-in-as')
-            @include('frontend.includes.nav')
 
-            <div class="container">
-                @include('includes.partials.messages')
-                @yield('content')
-            </div><!-- container -->
+            @yield('content')
+
         </div><!-- #app -->
 
         <!-- Scripts -->

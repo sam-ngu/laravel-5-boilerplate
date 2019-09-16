@@ -1,17 +1,17 @@
 <template>
-    <collapsible-sidebar :show-sidebar="show" @dismiss-sidebar="back">
+    <collapsible-sidebar v-model="states.show">
         <template slot="header">
             <h1>Create User</h1>
         </template>
 
         <template slot="content">
             <v-container>
-                <v-layout row>
-                    <v-flex>
+                <v-row >
+                    <v-col>
                         <user-create-form @user-created="back"></user-create-form>
 
-                    </v-flex>
-                </v-layout>
+                    </v-col>
+                </v-row>
             </v-container>
         </template>
 
@@ -28,7 +28,9 @@
         components: {UserCreateForm, CollapsibleSidebar},
         data() {
             return {
-                show: false,
+                states: {
+                    show: false,
+                }
             }
         },
         props: {},

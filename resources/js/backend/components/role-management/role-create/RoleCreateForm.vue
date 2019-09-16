@@ -1,7 +1,7 @@
 <template>
     <v-container>
 
-        <v-card class="pa-5 elevation-2">
+        <v-card class="pa-12 elevation-2">
 
             <v-form ref="form" v-model="states.is_form_valid" @submit.prevent="submitForm">
                 <v-text-field
@@ -14,8 +14,8 @@
                 <!--permission-->
                 <v-container>
                     <v-subheader>Associated Permission</v-subheader>
-                    <v-layout row>
-                        <v-flex xs12 md6 v-for="(item, index) in permissions" :key="index">
+                    <v-row >
+                        <v-col xs12 md6 v-for="(item, index) in permissions" :key="index">
                             <v-card>
                                 <v-switch
                                     :label="titleCase(item.name)"
@@ -23,8 +23,8 @@
                                 </v-switch>
 
                             </v-card>
-                        </v-flex>
-                    </v-layout>
+                        </v-col>
+                    </v-row>
                 </v-container>
 
 
