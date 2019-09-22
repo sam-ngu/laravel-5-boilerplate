@@ -8,6 +8,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserApiCrudTest extends TestCase
 {
-    
+
 
 }

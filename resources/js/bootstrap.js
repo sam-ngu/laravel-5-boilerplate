@@ -6,6 +6,7 @@ import _ from 'lodash'
 import axios from 'axios'
 import swal from 'sweetalert2';
 import $ from 'jquery';
+import moment from "moment"
 // import 'popper.js/dist/umd/popper'; // Required for BS4
 // import 'bootstrap';
 
@@ -36,6 +37,7 @@ dom.watch();
 window.$ = window.jQuery = $;
 window.swal = swal;
 window._ = _; // Lodash
+window.moment = moment
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

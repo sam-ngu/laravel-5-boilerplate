@@ -7,7 +7,7 @@
             color="light-blue darken-2">
         <v-app-bar-nav-icon @click="toggleSideBar"></v-app-bar-nav-icon>
 
-        <v-toolbar-title > <router-link class="white--text" style="text-decoration: none;" :to="{name: 'home'}">Acadea</router-link></v-toolbar-title>
+        <v-toolbar-title > <router-link class="white--text" style="text-decoration: none;" :to="{name: 'home'}">Boilerplate</router-link></v-toolbar-title>
 
         <v-spacer></v-spacer>
 

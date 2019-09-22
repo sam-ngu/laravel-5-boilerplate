@@ -4,5 +4,6 @@
 
 @section('content')
 
+<base-public></base-public>
 
 @endsection

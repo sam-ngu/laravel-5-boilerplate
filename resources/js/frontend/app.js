@@ -13,7 +13,7 @@ import VueRouter from "vue-router";
 import vuetifyopt from "../vuetifyopt";
 import routes from './routes/routes'
 import FrontendDashboard from "./components/dashboard/FrontendDashboard";
-
+import BasePublic from "./components/public/BasePublic";
 window.Vue = Vue;
 
 Vue.config.productionTip = false;
@@ -32,6 +32,7 @@ const files = require.context('./', true, /\.vue$/i)
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 
 Vue.component('frontend-dashboard', FrontendDashboard);
+Vue.component('base-public', BasePublic);
 
 
 /**
