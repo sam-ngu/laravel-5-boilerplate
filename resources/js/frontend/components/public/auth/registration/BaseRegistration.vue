@@ -29,7 +29,7 @@
     import LayoutMaster from "../../layout/Master";
     export default {
         name: "BaseRegistration",
-        components: {LayoutMaster, LoginSvg, RegistrationForm},
+        components: {LayoutMaster, RegistrationForm},
         props: {
             captchaKey: {
                 type: String,

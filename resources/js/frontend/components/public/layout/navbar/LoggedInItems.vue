@@ -94,7 +94,7 @@
     export default {
         name: "LoggedInItems",
         components: {BaseAvatar},
-        mixins: [CartMixin, ViewportHelperMixin],
+        mixins: [ViewportHelperMixin],
         data() {
             return {
                 menuItems: [

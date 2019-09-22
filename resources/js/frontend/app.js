@@ -14,6 +14,10 @@ import vuetifyopt from "../vuetifyopt";
 import routes from './routes/routes'
 import FrontendDashboard from "./components/dashboard/FrontendDashboard";
 import BasePublic from "./components/public/BasePublic";
+import BaseLogin from "./components/public/auth/login/BaseLogin";
+import BaseRegistration from "./components/public/auth/registration/BaseRegistration";
+import BasePasswordReset from "./components/public/auth/password/BasePasswordReset";
+
 window.Vue = Vue;
 
 Vue.config.productionTip = false;
@@ -33,6 +37,9 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 
 Vue.component('frontend-dashboard', FrontendDashboard);
 Vue.component('base-public', BasePublic);
+Vue.component('base-registration', BaseRegistration);
+Vue.component('base-login', BaseLogin);
+Vue.component('base-password-reset', BasePasswordReset);
 
 
 /**
