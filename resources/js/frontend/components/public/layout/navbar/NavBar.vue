@@ -20,7 +20,7 @@
                 {{item.title}}
             </v-btn>
 
-            <v-btn v-if="!isLoggedIn()" href="/login" color="success"  outlined style="max-height: 75%">
+            <v-btn class="my-auto" v-if="!isLoggedIn()" href="/login" color="success"  outlined style="max-height: 75%">
                 Login
             </v-btn>
 

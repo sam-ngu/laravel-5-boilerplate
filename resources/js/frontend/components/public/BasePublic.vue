@@ -9,6 +9,9 @@
     import BaseIndex from "./index/BaseIndex";
     export default {
         name: "BasePublic",
+        components: {
+            BaseIndex, LayoutMaster,
+        },
         data() {
             return {}
         },

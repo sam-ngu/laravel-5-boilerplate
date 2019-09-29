@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Auth;
 
 use App\Helpers\Auth\Auth;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Controller;
@@ -54,7 +55,7 @@ class LoginController extends Controller
      * @param Request $request
      * @param         $user
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      * @throws GeneralException
      */
     protected function authenticated(Request $request, $user)
@@ -85,7 +86,10 @@ class LoginController extends Controller
             resolve(UserSessionRepository::class)->clearSessionExceptCurrent($user);
         }
 
-        return redirect()->intended($this->redirectPath());
+        $redirect = redirect()->intended($this->redirectPath());
+        return JsonResponse::create([
+            'redirect' => $redirect->getTargetUrl(),
+        ]);
     }
 
     /**

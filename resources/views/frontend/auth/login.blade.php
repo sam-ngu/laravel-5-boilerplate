@@ -4,12 +4,14 @@
 
 @section('content')
     <base-login>
-        <div v-slot:socialite class="row">
-            <div class="col">
-                <div class="text-center"> 
-                    {!! $socialiteLinks !!}
-                </div>
-            </div><!--col-->
-        </div><!--row-->
+        <template v-slot:socialite>
+            <div class="row">
+                <div class="col">
+                    <div class="text-center"> 
+                        {!! $socialiteLinks !!}
+                    </div>
+                </div><!--col-->
+            </div><!--row-->
+        </template>
     </base-login>
 @endsection

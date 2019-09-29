@@ -11,6 +11,15 @@ let routes = [
         path: '/',
         component: BaseDashboard,
         name: 'home',
+        meta: {
+            breadcrumb: [
+                {
+                    text: 'Dashboard',
+                    disabled: true,
+                    href: '/admin/#/',
+                }
+            ],
+        },
     },
 
 ].concat(user, role);  // add more route groups here
