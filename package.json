@@ -79,6 +79,7 @@
     "moment": "^2.24.0",
     "vue-jest": "^3.0.3",
     "vue-loader": "^15.7.0",
+    "vue-recaptcha": "^1.2.0",
     "vue-router": "^3.0.2",
     "vue-template-es2015-compiler": "1.6.*",
     "vuetify": "^2.0.17"

@@ -13,15 +13,15 @@ class DeleteUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function an_admin_can_access_deleted_users_page()
-    {
-        $this->loginAsAdmin();
-
-        $response = $this->get('/admin/auth/user/deleted');
-
-        $response->assertStatus(200);
-    }
+//    /** @test */
+//    public function an_admin_can_access_deleted_users_page()
+//    {
+//        $this->loginAsAdmin();
+//
+//        $response = $this->get('/admin/auth/user/deleted');
+//
+//        $response->assertStatus(200);
+//    }
 
     /** @test */
     public function a_user_must_be_soft_deleted_before_permanently_deleted()

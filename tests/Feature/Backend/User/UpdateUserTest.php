@@ -14,16 +14,16 @@ class UpdateUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function an_admin_can_access_the_edit_user_page()
-    {
-        $this->loginAsAdmin();
-        $user = factory(User::class)->create();
-
-        $response = $this->get('/admin/auth/user/'.$user->id.'/edit');
-
-        $response->assertStatus(200);
-    }
+//    /** @test */
+//    public function an_admin_can_access_the_edit_user_page()
+//    {
+//        $this->loginAsAdmin();
+//        $user = factory(User::class)->create();
+//
+//        $response = $this->get('/admin/auth/user/'.$user->id.'/edit');
+//
+//        $response->assertStatus(200);
+//    }
 
     /** @test  */
     public function an_admin_can_resend_users_confirmation_email()

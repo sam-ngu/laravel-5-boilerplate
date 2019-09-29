@@ -4,8 +4,10 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Spatie\Permission\Exceptions\UnauthorizedException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Whoops\Handler\HandlerInterface;
 
 /**
  * Class Handler.
@@ -72,4 +74,13 @@ class Handler extends ExceptionHandler
             ? response()->json(['message' => 'Unauthenticated.'], 401)
             : redirect()->guest(route('frontend.auth.login'));
     }
+
+//    protected function whoopsHandler()
+//    {
+//        try {
+//            return app(HandlerInterface::class);
+//        } catch ( BindingResolutionException $e) {
+//            return parent::whoopsHandler();
+//        }
+//    }
 }

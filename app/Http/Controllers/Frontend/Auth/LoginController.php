@@ -12,6 +12,7 @@ use App\Events\Frontend\Auth\UserLoggedIn;
 use App\Events\Frontend\Auth\UserLoggedOut;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Repositories\Frontend\Auth\UserSessionRepository;
+use LangleyFoxall\LaravelNISTPasswordRules\PasswordRules;
 
 /**
  * Class LoginController.
@@ -47,6 +48,25 @@ class LoginController extends Controller
     public function username()
     {
         return config('access.users.username');
+    }
+
+    /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => 'required|string',
+            'password' => PasswordRules::login(),
+            'g-recaptcha-response' => ['required_if:captcha_status,true', 'captcha'],
+        ], [
+            'g-recaptcha-response.required_if' => __('validation.required', ['attribute' => 'captcha']),
+        ]);
     }
 
     /**

@@ -9,4 +9,4 @@ use App\Http\Controllers\Backend\DashboardController;
 Route::redirect('/', '/admin/', 301);
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 //Route::get('blade', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/', [\App\Http\Controllers\Backend\SpaController::class, 'index'])->name('home');
+Route::get('/', [DashboardController::class, 'index'])->name('home');

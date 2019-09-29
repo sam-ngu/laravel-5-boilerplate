@@ -12,14 +12,14 @@ class UpdateRoleTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function an_admin_can_access_the_edit_role_page()
-    {
-        $role = factory(Role::class)->create();
-        $this->loginAsAdmin();
-
-        $this->get("/admin/auth/role/{$role->id}/edit")->assertStatus(200);
-    }
+//    /** @test */
+//    public function an_admin_can_access_the_edit_role_page()
+//    {
+//        $role = factory(Role::class)->create();
+//        $this->loginAsAdmin();
+//
+//        $this->get("/admin/auth/role/{$role->id}/edit")->assertStatus(200);
+//    }
 
     /** @test */
     public function name_is_required()

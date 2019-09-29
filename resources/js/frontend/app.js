@@ -10,6 +10,7 @@ import '../plugins';
 import Vue from 'vue';
 import Vuetify from "vuetify";
 import VueRouter from "vue-router";
+import VueRecaptcha from "vue-recaptcha";
 import vuetifyopt from "../vuetifyopt";
 import routes from './routes/routes'
 import FrontendDashboard from "./components/dashboard/FrontendDashboard";
@@ -34,7 +35,7 @@ Vue.use(VueRouter)
 
 const files = require.context('./', true, /\.vue$/i)
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
-
+Vue.component('vue-recaptcha', VueRecaptcha);
 Vue.component('frontend-dashboard', FrontendDashboard);
 Vue.component('base-public', BasePublic);
 Vue.component('base-registration', BaseRegistration);

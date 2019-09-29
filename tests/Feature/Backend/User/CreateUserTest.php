@@ -15,15 +15,15 @@ class CreateUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function an_admin_can_access_the_create_user_page()
-    {
-        $this->loginAsAdmin();
-
-        $response = $this->get('/admin/auth/user/create');
-
-        $response->assertStatus(200);
-    }
+//    /** @test */
+//    public function an_admin_can_access_the_create_user_page()
+//    {
+//        $this->loginAsAdmin();
+//
+//        $response = $this->get('/admin/auth/user/create');
+//
+//        $response->assertStatus(200);
+//    }
 
     /** @test */
     public function create_user_has_required_fields()
@@ -71,8 +71,8 @@ class CreateUserTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
+            'password' => 'OC4Nzu270N!QBVi%U%qX',
+            'password_confirmation' => 'OC4Nzu270N!QBVi%U%qX',
             'active' => '1',
             'confirmed' => '1',
             'timezone' => 'UTC',
@@ -105,8 +105,8 @@ class CreateUserTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
+            'password' => 'OC4Nzu270N!QBVi%U%qX',
+            'password_confirmation' => 'OC4Nzu270N!QBVi%U%qX',
             'active' => '1',
             'confirmed' => '0',
             'timezone' => 'UTC',

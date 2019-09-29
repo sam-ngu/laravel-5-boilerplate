@@ -28,16 +28,16 @@ class ChangeUserPasswordTest extends TestCase
 //        $this->assertContains(__('auth.password_rules'), $response->content());
 //    }
 
-    /** @test */
-    public function an_admin_can_access_a_user_change_password_page()
-    {
-        $this->loginAsAdmin();
-        $user = factory(User::class)->create();
-
-        $response = $this->get("/admin/auth/user/{$user->id}/password/change");
-
-        $response->assertStatus(200);
-    }
+//    /** @test */
+//    public function an_admin_can_access_a_user_change_password_page()
+//    {
+//        $this->loginAsAdmin();
+//        $user = factory(User::class)->create();
+//
+//        $response = $this->get("/admin/auth/user/{$user->id}/password/change");
+//
+//        $response->assertStatus(200);
+//    }
 
     /** @test */
     public function the_passwords_must_match()
@@ -61,8 +61,8 @@ class ChangeUserPasswordTest extends TestCase
         Event::fake();
 
         $response = $this->patch("/admin/auth/user/{$user->id}/password/change", [
-            'password' => 'Boilerplate01',
-            'password_confirmation' => 'Boilerplate01',
+            'password' => 'OC4Nzu270N!QBVi%U%qX',
+            'password_confirmation' => 'OC4Nzu270N!QBVi%U%qX',
         ]);
 
         $response->assertSessionHas(['flash_success' => __('alerts.backend.users.updated_password')]);
@@ -76,15 +76,15 @@ class ChangeUserPasswordTest extends TestCase
         config(['access.users.password_history' => false]);
 
         $this->loginAsAdmin();
-        $user = factory(User::class)->create(['password' => 'Boilerplate01']);
+        $user = factory(User::class)->create(['password' => 'OC4Nzu270N!QBVi%U%qX']);
 
         $response = $this->patch("/admin/auth/user/{$user->id}/password/change", [
-            'password' => 'Boilerplate01',
-            'password_confirmation' => 'Boilerplate01',
+            'password' => 'OC4Nzu270N!QBVi%U%qX',
+            'password_confirmation' => 'OC4Nzu270N!QBVi%U%qX',
         ]);
 
         $response->assertSessionHas(['flash_success' => __('alerts.backend.users.updated_password')]);
-        $this->assertTrue(Hash::check('Boilerplate01', $user->fresh()->password));
+        $this->assertTrue(Hash::check('OC4Nzu270N!QBVi%U%qX', $user->fresh()->password));
     }
 
     /** @test */
@@ -93,21 +93,21 @@ class ChangeUserPasswordTest extends TestCase
         config(['access.users.password_history' => 3]);
 
         $this->loginAsAdmin();
-        $user = factory(User::class)->create(['password' => 'Boilerplate01']);
+        $user = factory(User::class)->create(['password' => 'OC4Nzu270N!QBVi%U%qX']);
 
         $this->patch("/admin/auth/user/{$user->id}/password/change", [
-            'password' => 'Boilerplate02',
-            'password_confirmation' => 'Boilerplate02',
+            'password' => 'OC4Nzu270N!QBVi%U%qX_02',
+            'password_confirmation' => 'OC4Nzu270N!QBVi%U%qX_02',
         ]);
 
         $response = $this->patch("/admin/auth/user/{$user->id}/password/change", [
-            'password' => 'Boilerplate01',
-            'password_confirmation' => 'Boilerplate01',
+            'password' => 'OC4Nzu270N!QBVi%U%qX',
+            'password_confirmation' => 'OC4Nzu270N!QBVi%U%qX',
         ]);
 
         $response->assertSessionHasErrors();
         $errors = session('errors');
         $this->assertEquals($errors->get('password')[0], __('auth.password_used'));
-        $this->assertTrue(Hash::check('Boilerplate02', $user->fresh()->password));
+        $this->assertTrue(Hash::check('OC4Nzu270N!QBVi%U%qX_02', $user->fresh()->password));
     }
 }

@@ -60,14 +60,14 @@ class PasswordExpirationTest extends TestCase
 //        config(['access.users.password_expires_days' => 30]);
 //
 //        $user = factory(User::class)->create([
-//            'password' => ']EqZL4}zBT',
+//            'password' => 'OC4Nzu270N!QBVi%U%qX',
 //            'password_changed_at' => Carbon::now()->subMonths(2)->toDateTimeString(),
 //        ]);
 //
 //        $response = $this->actingAs($user)
 //            ->followingRedirects()
 //            ->patch('/password/expired', [
-//                'old_password' => ']EqZL4}zBT',
+//                'old_password' => 'OC4Nzu270N!QBVi%U%qX',
 //                'password' => 'secret',
 //                'password_confirmation' => 'secret',
 //            ]);
@@ -82,19 +82,19 @@ class PasswordExpirationTest extends TestCase
         config(['access.users.password_expires_days' => 30]);
 
         $user = factory(User::class)->create([
-            'password' => ']EqZL4}zBT',
+            'password' => 'OC4Nzu270N!QBVi%U%qX',
             'password_changed_at' => Carbon::now()->subMonths(2)->toDateTimeString(),
         ]);
 
         $response = $this->actingAs($user)
             ->patch('/password/expired', [
-                'old_password' => ']EqZL4}zBT',
-                'password' => ']EqZL4}zBT',
-                'password_confirmation' => ']EqZL4}zBT',
+                'old_password' => 'OC4Nzu270N!QBVi%U%qX',
+                'password' => 'OC4Nzu270N!QBVi%U%qX',
+                'password_confirmation' => 'OC4Nzu270N!QBVi%U%qX',
             ]);
 
         $response->assertSessionHas('flash_success');
-        $this->assertTrue(Hash::check(']EqZL4}zBT', $user->fresh()->password));
+        $this->assertTrue(Hash::check('OC4Nzu270N!QBVi%U%qX', $user->fresh()->password));
     }
 
     /** @test */
@@ -104,13 +104,13 @@ class PasswordExpirationTest extends TestCase
         config(['access.users.password_expires_days' => 30]);
 
         $user = factory(User::class)->create([
-            'password' => ']EqZL4}zBT',
+            'password' => 'OC4Nzu270N!QBVi%U%qX',
             'password_changed_at' => Carbon::now()->subMonths(2)->toDateTimeString(),
         ]);
 
         $this->actingAs($user)
             ->patch('/password/expired', [
-                'old_password' => ']EqZL4}zBT',
+                'old_password' => 'OC4Nzu270N!QBVi%U%qX',
                 'password' => ':ZqD~57}1t',
                 'password_confirmation' => ':ZqD~57}1t',
             ]);
@@ -118,8 +118,8 @@ class PasswordExpirationTest extends TestCase
         $response = $this->actingAs($user)
             ->patch('/password/expired', [
                 'old_password' => ':ZqD~57}1t',
-                'password' => ']EqZL4}zBT',
-                'password_confirmation' => ']EqZL4}zBT',
+                'password' => 'OC4Nzu270N!QBVi%U%qX',
+                'password_confirmation' => 'OC4Nzu270N!QBVi%U%qX',
             ]);
 
         $response->assertSessionHasErrors();
