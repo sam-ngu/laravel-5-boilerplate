@@ -13,6 +13,7 @@ import VueRouter from "vue-router";
 import VueRecaptcha from "vue-recaptcha";
 import vuetifyopt from "../vuetifyopt";
 import routes from './routes/routes'
+import store from "../store/store";
 import FrontendDashboard from "./components/dashboard/FrontendDashboard";
 import BasePublic from "./components/public/BasePublic";
 import BaseLogin from "./components/public/auth/login/BaseLogin";
@@ -53,4 +54,5 @@ const app = new Vue({
     vuetify: new Vuetify(vuetifyopt),
     el: '#app',
     router: routes
+    // store  // uncomment this if using vuex
 });

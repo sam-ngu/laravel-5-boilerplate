@@ -63,6 +63,7 @@
                     info = "";
 
                 swal({
+                    persistent: true,
                     title: "Loading",
                     showCancelButton: false,
                     showConfirmButton: false,

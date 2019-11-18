@@ -14,22 +14,6 @@
                                     name: 'role-create',
                                 }"
                     />
-
-<!--                    <v-tooltip bottom class="ml-auto">-->
-<!--                        <template slot="activator">-->
-<!--                            <v-btn-->
-<!--                                icon-->
-<!--                                class="no-underline"-->
-<!--                                color="success"-->
-<!--                                :to="{-->
-<!--                                    name: 'role-create',-->
-<!--                                }"-->
-<!--                            ><v-icon>add</v-icon></v-btn>-->
-<!--                        </template>-->
-<!--                        <span>Add new role</span>-->
-<!--                    </v-tooltip>-->
-
-
                 </v-toolbar>
             </v-col>
         </v-row>
@@ -39,6 +23,7 @@
                 <v-data-table
                     :headers="headers"
                     :items="data.roles"
+                    :items-per-page="pageSize"
                     :loading="states.isLoading"
                     hide-default-footer
                     class="elevation-3"
@@ -145,11 +130,12 @@
     import SwalMixin from "../../../mixins/SwalMixin";
     import StringHelperMixin from "../../../mixins/StringHelperMixin";
     import ButtonTooltip from "../../../vue-tools/ButtonTooltip";
+    import AxiosHelperMixin from "../../../mixins/AxiosHelperMixin";
 
     export default {
         name: "RoleTable",
         components: {ButtonTooltip},
-        mixins: [SwalMixin, StringHelperMixin],
+        mixins: [AxiosHelperMixin, SwalMixin, StringHelperMixin],
         data() {
             return {
                 states: {
@@ -188,16 +174,8 @@
                         this.states.isLoading = false;
                         this.reloadTable();
 
-                    }.bind(this)).catch(function (response) {
-                        console.log('Error: ' + response);
-
-                        let errors = response.response.data.error;
-                        if ((typeof errors) === "string")
-                            errors = {errors};
-                        swal.close();
-                        this.swalMessage("error", errors)
-
-                }.bind(this));
+                    }.bind(this))
+                    .catch(this.axiosErrorCallback);
             },
             async fetchRoles(){
                 await this.$nextTick();
@@ -214,16 +192,8 @@
                         this.states.isLoading = false;
                         this.apiMeta = response.data.meta;
 
-                    }.bind(this)).catch(function (response) {
-                        console.log('Error: ' + response);
-
-                        let errors = response.response.data.error;
-                        if ((typeof errors) === "string")
-                            errors = {errors};
-                        swal.close();
-                        this.swalMessage("error", errors)
-
-                    }.bind(this));
+                    }.bind(this))
+                    .catch(this.axiosErrorCallback);
             },
             isEmpty(array){
                 return _.isEmpty(array);
