@@ -57,6 +57,7 @@
     import AxiosHelperMixin from "../../../../../mixins/AxiosHelperMixin";
     import LayoutMaster from "../../layout/Master";
     import SwalMixin from "../../../../../mixins/SwalMixin";
+    import {emailValidator} from "../../../../../vue-tools/ValidationHelper";
 
     export default {
         name: "BasePasswordReset",
@@ -73,7 +74,7 @@
                 rules: {
                     email: [
                         v => !!v || "Required",
-                        v => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'Incorrect format',  // 99% email regex
+                        emailValidator,
                     ]
                 }
 

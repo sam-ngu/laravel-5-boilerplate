@@ -1,11 +1,11 @@
 <template>
     <div class="wrapper" >
 
-        <nav id="sidebar" :class="{'active': value}">
-        <!--<nav id="sidebar">-->
+        <nav id="sidebar" :class="{'active': value}" :style="style.sidebar">
+            <!--<nav id="sidebar">-->
             <!-- Close Sidebar Button -->
             <!--<div id="dismiss" @click="dismiss">-->
-                <!--<i class="far fa-times-circle"></i>-->
+            <!--<i class="far fa-times-circle"></i>-->
             <!--</div>-->
 
             <!-- Sidebar Header -->
@@ -41,9 +41,20 @@
             value: {
                 type: Boolean,
             },
+            width: {
+                type: String,
+                default: '80%'
+            }
 
         },
         computed:{
+            style(){
+                return {
+                    sidebar: {
+                        width: this.width,
+                    }
+                }
+            }
         },
 
         methods: {
@@ -84,27 +95,27 @@
         transition: all 0.3s;
     }
 
-    .navbar {
-        padding: 15px 10px;
-        background: #fff;
-        border: none;
-        border-radius: 0;
-        margin-bottom: 40px;
-        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    }
+    /*.navbar {*/
+    /*    padding: 15px 10px;*/
+    /*    background: #fff;*/
+    /*    border: none;*/
+    /*    border-radius: 0;*/
+    /*    margin-bottom: 40px;*/
+    /*    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);*/
+    /*}*/
 
-    .navbar-btn {
-        box-shadow: none;
-        outline: none !important;
-        border: none;
-    }
+    /*.navbar-btn {*/
+    /*    box-shadow: none;*/
+    /*    outline: none !important;*/
+    /*    border: none;*/
+    /*}*/
 
-    .line {
-        width: 100%;
-        height: 1px;
-        border-bottom: 1px dashed #686868;
-        margin: 40px 0;
-    }
+    /*.line {*/
+    /*    width: 100%;*/
+    /*    height: 1px;*/
+    /*    border-bottom: 1px dashed #686868;*/
+    /*    margin: 40px 0;*/
+    /*}*/
 
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s;
@@ -122,7 +133,6 @@
         SIDEBAR STYLE
     ----------------------------------------------------- */
     #sidebar {
-        width: 80%;
         position: fixed;
         top: 0;
         right: -100%;
