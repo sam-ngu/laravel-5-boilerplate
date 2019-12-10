@@ -48,13 +48,12 @@
 </template>
 
 <script>
-    import AxiosHelperMixin from "../../../../../mixins/AxiosHelperMixin";
-    import SwalMixin from "../../../../../mixins/SwalMixin";
     import {emailValidator} from "../../../../../vue-tools/ValidationHelper";
+    import {swalLoader, swalMessage} from "../../../../../vue-tools/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../../vue-tools/swal/AxiosHelper";
 
     export default {
         name: "LoginForm",
-        mixins: [SwalMixin, AxiosHelperMixin],
         components: {},
         data() {
             return {
@@ -82,11 +81,10 @@
         methods: {
             submitForm(){
                 if(!this.$refs.form.validate()){
-                    this.swalMessage("error", "Please complete the form");
+                    swalMessage("error", "Please complete the form");
                     return
                 }
-
-                this.swalLoader();
+                swalLoader();
 
                 let uri = "/login";
 
@@ -104,8 +102,8 @@
                         response = response.response;
                         // console.log(response)
                         if(!response.data.success) // !!bad practice here, inconsistent api, this is to capture user is still under confirmation error
-                            return this.swalMessage('error', response.data.message)
-                        this.axiosErrorCallback(response, response.data.message)
+                            return swalMessage('error', response.data.message)
+                        axiosErrorCallback(response, response.data.message)
                     })
 
             },

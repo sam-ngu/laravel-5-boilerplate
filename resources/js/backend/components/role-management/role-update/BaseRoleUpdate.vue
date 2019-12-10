@@ -13,14 +13,13 @@
 
 <script>
     import CollapsibleSidebar from "../../../../vue-tools/CollapsibleSidebar";
-    import SwalMixin from "../../../../mixins/SwalMixin"
     import StringHelperMixin from "../../../../mixins/StringHelperMixin"
     import RoleUpdateForm from "./RoleUpdateForm";
 
     export default {
         name: "BaseRoleUpdate",
         components: {RoleUpdateForm, CollapsibleSidebar},
-        mixins: [SwalMixin, StringHelperMixin],
+        mixins: [ StringHelperMixin],
         data() {
             return {
 

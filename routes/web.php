@@ -35,10 +35,11 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
     include_route_files(__DIR__.'/backend/');
 });
 
+if(\Illuminate\Support\Facades\App::environment('local')) {
 
-Route::get('/phpinfo', function (){
-    return (string)phpinfo();
-});
-
+    Route::get('/phpinfo', function () {
+        return (string)phpinfo();
+    });
+}
 
 

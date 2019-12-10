@@ -139,14 +139,14 @@
 </template>
 
 <script>
-    import SwalMixin from "../../../../mixins/SwalMixin";
     import {EventBus} from "../../../../vue-tools/event-bus";
     import BaseAvatar from "../../../../vue-tools/BaseAvatar";
     import {emailValidator} from "../../../../vue-tools/ValidationHelper";
+    import {axiosErrorCallback} from "../../../../vue-tools/swal/AxiosHelper";
+    import {swalTimer} from "../../../../vue-tools/swal/SwalHelper";
 
     export default {
         name: "UserUpdateForm",
-        mixins: [SwalMixin],
         components: {BaseAvatar},
         data() {
             return {
@@ -209,7 +209,7 @@
 
             submitForm(){
                 if(!this.states.hasEdited && !this.$refs.form.validate()){
-                    this.swalMessage("error", "Please complete the form");
+                    swalMessage("error", "Please complete the form");
                     return
                 }
 
@@ -229,16 +229,11 @@
 
                 axios.patch(uri, this.inputData)
                     .then(function(response){
-                        this.swalTimer("success");
+                        swalTimer("success");
                         this.$emit("user-updated");
                         EventBus.$emit("table-reload-required")
                     }.bind(this))
-                    .catch(function (response) {
-                        let errors = response.response.data.error;
-                        if ((typeof errors) === "string")
-                            errors = {errors};
-                        this.swalMessage("error", errors)
-                    }.bind(this))
+                    .catch(axiosErrorCallback)
             },
         },
         mounted() {

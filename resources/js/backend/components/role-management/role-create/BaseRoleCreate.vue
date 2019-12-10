@@ -8,7 +8,7 @@
             <v-container>
                 <v-row >
                     <v-col>
-                        <role-create-form @role-created="back"></role-create-form>
+                        <role-create-form @role-created="back"/>
 
                     </v-col>
                 </v-row>
@@ -20,11 +20,9 @@
 
 <script>
     import CollapsibleSidebar from "../../../../vue-tools/CollapsibleSidebar";
-    import SwalMixin from "../../../../mixins/SwalMixin";
     import RoleCreateForm from "./RoleCreateForm";
     export default {
         name: "BaseRoleCreate",
-        mixins: [SwalMixin],
         components: {RoleCreateForm, CollapsibleSidebar},
         data() {
             return {

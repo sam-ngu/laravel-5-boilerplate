@@ -54,15 +54,14 @@
 </template>
 <script>
 
-    import AxiosHelperMixin from "../../../../../mixins/AxiosHelperMixin";
     import LayoutMaster from "../../layout/Master";
-    import SwalMixin from "../../../../../mixins/SwalMixin";
     import {emailValidator} from "../../../../../vue-tools/ValidationHelper";
+    import {swalLoader, swalMessage} from "../../../../../vue-tools/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../../vue-tools/swal/AxiosHelper";
 
     export default {
         name: "BasePasswordReset",
         components: { LayoutMaster},
-        mixins: [AxiosHelperMixin, SwalMixin],
         data() {
             return {
                 states: {
@@ -85,15 +84,15 @@
         methods: {
             submitForm() {
                 if(!this.$refs.form.validate())
-                    return this.swalMessage('error', 'Please complete the form');
-                this.swalLoader();
+                    return swalMessage('error', 'Please complete the form');
+                swalLoader();
                 let uri = '/password/email';
 
                 return axios.post(uri, this.inputData)
                     .then((response) => {
-                        this.swalMessage('success', response.data.message)
+                        swalMessage('success', response.data.message)
                     })
-                    .catch(response => this.axiosErrorCallback(response, response.response.data.error))
+                    .catch(response => axiosErrorCallback(response, response.response.data.error))
             }
         },
         mounted() {

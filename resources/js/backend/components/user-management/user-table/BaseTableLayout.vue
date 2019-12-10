@@ -92,16 +92,16 @@
 
 <script>
     import {EventBus} from "../../../../vue-tools/event-bus";
-    import SwalMixin from "../../../../mixins/SwalMixin";
     import UserTable from "./UserTable";
     import StringHelperMixin from "../../../../mixins/StringHelperMixin";
     import ButtonTooltip from "../../../../vue-tools/ButtonTooltip";
-    import AxiosHelperMixin from "../../../../mixins/AxiosHelperMixin";
+    import {swalLoader} from "../../../../vue-tools/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../vue-tools/swal/AxiosHelper";
 
     export default {
         name: "BaseTableLayout",
         components: {ButtonTooltip, UserTable},
-        mixins: [AxiosHelperMixin, SwalMixin, StringHelperMixin],
+        mixins: [StringHelperMixin],
         data() {
             return {
                 states: {
@@ -147,7 +147,7 @@
 
             async fetchUsers(){
                 await this.$nextTick();
-                this.swalLoader();
+                swalLoader();
                 this.states.isLoading = true;
                 let uri;
                 uri = `/api/v1/users?page=${this.apiMeta.current_page}`;
@@ -167,7 +167,7 @@
                         this.apiMeta = response.data.meta;
 
                     }.bind(this))
-                    .catch(this.axiosErrorCallback);
+                    .catch(axiosErrorCallback);
             },
             reloadTable(){
                 this.fetchUsers()

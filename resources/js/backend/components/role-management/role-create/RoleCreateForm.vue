@@ -39,15 +39,16 @@
 </template>
 
 <script>
-    import SwalMixin from "../../../../mixins/SwalMixin";
     import {EventBus} from "../../../../vue-tools/event-bus";
     import PermissionMixin from "../common-role-mixin/PermissionMixin";
     import StringHelperMixin from "../../../../mixins/StringHelperMixin";
+    import {swalMessage, swalTimer} from "../../../../vue-tools/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../vue-tools/swal/AxiosHelper";
 
     export default {
         name: "RoleCreateForm",
         components: {},
-        mixins: [SwalMixin, StringHelperMixin, PermissionMixin],
+        mixins: [StringHelperMixin, PermissionMixin],
         data() {
             return {
                 states: {
@@ -75,9 +76,10 @@
         },
         computed: {},
         methods: {
+
             submitForm(){
                 if(!this.$refs.form.validate()){
-                    this.swalMessage("error", "Please complete the form");
+                    swalMessage("error", "Please complete the form");
                     return
                 }
 
@@ -91,16 +93,11 @@
 
                 axios.post(uri, this.inputData)
                     .then(function(response){
-                        this.swalTimer("success");
+                        swalTimer("success");
                         this.$emit("role-created");
                         EventBus.$emit("table-reload-required")
                     }.bind(this))
-                    .catch(function (response) {
-                        let errors = response.response.data.error;
-                        if ((typeof errors) === "string")
-                            errors = {errors};
-                        this.swalMessage("error", errors)
-                    }.bind(this))
+                    .catch(axiosErrorCallback)
             },
 
         },

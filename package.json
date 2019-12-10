@@ -82,6 +82,6 @@
     "vue-recaptcha": "^1.2.0",
     "vue-router": "^3.0.2",
     "vue-template-es2015-compiler": "1.6.*",
-    "vuetify": "^2.0.17"
+    "vuetify": "^2.1.13"
   }
 }

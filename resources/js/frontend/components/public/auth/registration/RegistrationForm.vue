@@ -81,13 +81,12 @@
 </template>
 
 <script>
-    import SwalMixin from "../../../../../mixins/SwalMixin";
-    import AxiosHelperMixin from "../../../../../mixins/AxiosHelperMixin";
     import {emailValidator} from "../../../../../vue-tools/ValidationHelper";
+    import {swalLoader, swalMessage} from "../../../../../vue-tools/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../../vue-tools/swal/AxiosHelper";
 
     export default {
         name: "RegistrationForm",
-        mixins: [AxiosHelperMixin, SwalMixin],
         data() {
             return {
                 states: {
@@ -148,7 +147,7 @@
         methods: {
             submitForm(){
                 if(!this.$refs.form.validate()){
-                    this.swalMessage("error", "Please complete the form");
+                    swalMessage("error", "Please complete the form");
                     return
                 }
                 this.submitCaptcha();
@@ -163,7 +162,7 @@
                 // console.log(response);
                 // console.log('Verify: ' + response);
 
-                this.swalLoader();
+                swalLoader();
                 this.inputData.captcha_token = response;
 
                 let uri = "/register";
@@ -172,13 +171,12 @@
                     .then(function(response){
 
                         let redirect = response.data.redirect;
-                        this.swalMessage("success", response.data.data)
+                        swalMessage("success", response.data.data)
                             .then(function (response) {
                                 window.location = redirect;
                             });
-
                     }.bind(this))
-                    .catch(this.axiosErrorCallback)
+                    .catch(axiosErrorCallback)
 
             },
             onExpired: function () {

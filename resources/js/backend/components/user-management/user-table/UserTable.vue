@@ -2,7 +2,7 @@
     <v-data-table
         :headers="headers"
         :items="data"
-        :items-per-page="data.length"
+        :items-per-page="data.length || 10000"
         :loading="isLoading"
         hide-default-footer
         class="elevation-3"

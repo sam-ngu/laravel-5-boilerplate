@@ -38,12 +38,12 @@
 <script>
     import {MessageBus} from "../../../../vue-tools/message-bus";
     import {EventBus} from "../../../../vue-tools/event-bus";
-    import SwalMixin from "../../../../mixins/SwalMixin";
     import ButtonTooltip from "../../../../vue-tools/ButtonTooltip";
+    import {swalConfirm, swalLoader, swalMessage} from "../../../../vue-tools/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../vue-tools/swal/AxiosHelper";
 
     export default {
         name: "UserTableActions",
-        mixins: [SwalMixin],
         components: {ButtonTooltip},
         data() {
             return {}
@@ -116,26 +116,20 @@
                 this.callApi(uri);
             },
             callApi(uri, method = 'get'){
-                this.swalLoader();
+                swalLoader();
                 axios({
                     method: method,
                     url: uri,
                 }).then(function (response) {
                     swal.close();
                     EventBus.$emit('table-reload-required');
-                }).catch(function (response) {
-                    let errors = response.response.data.error;
-                    if ((typeof errors) === "string")
-                        errors = {errors};
-                    swal.close();
-                    this.swalMessage("error", errors)
-                }.bind(this))
+                }).catch(axiosErrorCallback)
             },
             deleteItem(){
                 let uri;
 
-                this.swalConfirm("", function(){
-                    this.swalLoader();
+                swalConfirm("", function(){
+                    swalLoader();
 
                     if(this.isActive || this.isDeactivated){
                         uri = '/api/v1/users/' + String(this.user.id);

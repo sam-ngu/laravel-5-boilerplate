@@ -102,13 +102,13 @@
 </template>
 
 <script>
-    import SwalMixin from "../../../../mixins/SwalMixin";
     import {EventBus} from "../../../../vue-tools/event-bus";
     import {emailValidator} from "../../../../vue-tools/ValidationHelper";
+    import {swalMessage, swalTimer} from "../../../../vue-tools/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../vue-tools/swal/AxiosHelper";
 
     export default {
         name: "UserCreateForm",
-        mixins: [SwalMixin],
         data() {
             return {
                 states: {
@@ -159,7 +159,7 @@
         methods: {
             submitForm(){
                 if(!this.$refs.form.validate()){
-                    this.swalMessage("error", "Please complete the form");
+                    swalMessage("error", "Please complete the form");
                     return
                 }
 
@@ -179,16 +179,12 @@
 
                 axios.post(uri, this.inputData)
                     .then(function(response){
-                        this.swalTimer("success");
+
+                        swalTimer("success");
                         this.$emit("user-created");
                         EventBus.$emit("table-reload-required")
                     }.bind(this))
-                    .catch(function (response) {
-                        let errors = response.response.data.error;
-                        if ((typeof errors) === "string")
-                            errors = {errors};
-                        this.swalMessage("error", errors)
-                    })
+                    .catch(axiosErrorCallback)
             }
 
         },

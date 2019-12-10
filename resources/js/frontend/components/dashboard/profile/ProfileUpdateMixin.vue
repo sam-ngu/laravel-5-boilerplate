@@ -1,12 +1,11 @@
 <script>
     import {MessageBus} from "../../../../vue-tools/message-bus";
-    import SwalMixin from "../../../../mixins/SwalMixin";
-    import AxiosHelperMixin from "../../../../mixins/AxiosHelperMixin";
     import {EventBus} from "../../../../vue-tools/event-bus";
+    import {swalConfirm, swalLoader, swalTimer} from "../../../../vue-tools/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../vue-tools/swal/AxiosHelper";
 
     export default {
         name: "ProfileUpdateMixin",
-        mixins: [AxiosHelperMixin, SwalMixin],
         components: {},
         data() {
             return {
@@ -36,21 +35,20 @@
             save(){
                 if(!this.states.is_form_valid && !this.states.hasEdited)
                     return;
-                this.swalConfirm("",
-                    function () {
-                        this.swalLoader();
-                        return axios.patch(this.uri, this.inputData)
-                            .then(function (response) {
-                                EventBus.$emit('fetch-session-required');
-                                this.swalTimer('success', 500)
-                                    .then(function () {
-                                        this.$router.push({
-                                            name: 'user-profile'
-                                        })
-                                    }.bind(this));
-                            }.bind(this))
-                            .catch(this.axiosErrorCallback)
-                    }.bind(this)
+                swalConfirm("", () => {
+                    swalLoader();
+                    return axios.patch(this.uri, this.inputData)
+                        .then(function (response) {
+                            EventBus.$emit('fetch-session-required');
+                            swalTimer('success', 500)
+                                .then(function () {
+                                    this.$router.push({
+                                        name: 'user-profile'
+                                    })
+                                }.bind(this));
+                        }.bind(this))
+                        .catch(axiosErrorCallback)
+                    }
                 );
             },
             edit(){

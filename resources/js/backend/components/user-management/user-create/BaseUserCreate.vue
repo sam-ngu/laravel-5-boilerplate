@@ -8,7 +8,7 @@
             <v-container>
                 <v-row >
                     <v-col>
-                        <user-create-form @user-created="back"></user-create-form>
+                        <user-create-form @user-created="back"/>
 
                     </v-col>
                 </v-row>
@@ -20,11 +20,9 @@
 
 <script>
     import CollapsibleSidebar from "../../../../vue-tools/CollapsibleSidebar";
-    import SwalMixin from "../../../../mixins/SwalMixin";
     import UserCreateForm from "./UserCreateForm";
     export default {
         name: "BaseUserCreate",
-        mixins: [SwalMixin],
         components: {UserCreateForm, CollapsibleSidebar},
         data() {
             return {

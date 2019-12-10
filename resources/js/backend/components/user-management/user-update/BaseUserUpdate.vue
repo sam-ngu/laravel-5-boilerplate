@@ -5,7 +5,7 @@
         </template>
 
         <template slot="content">
-            <user-update-form :data="data" @user-updated="back"></user-update-form>
+            <user-update-form :data="data" @user-updated="back"/>
         </template>
 
     </collapsible-sidebar>
@@ -13,13 +13,11 @@
 
 <script>
     import CollapsibleSidebar from "../../../../vue-tools/CollapsibleSidebar";
-    import SwalMixin from "../../../../mixins/SwalMixin"
     import UserUpdateForm from "./UserUpdateForm";
 
     export default {
         name: "BaseUserUpdate",
         components: {UserUpdateForm, CollapsibleSidebar},
-        mixins: [SwalMixin],
         data() {
             return {
                 show: false,

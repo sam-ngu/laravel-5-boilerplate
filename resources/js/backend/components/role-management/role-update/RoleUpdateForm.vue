@@ -42,15 +42,16 @@
 </template>
 
 <script>
-    import SwalMixin from "../../../../mixins/SwalMixin";
     import {EventBus} from "../../../../vue-tools/event-bus";
     import LoadingEclipse from "../../../../vue-tools/LoadingEclipse";
     import StringHelperMixin from "../../../../mixins/StringHelperMixin";
     import PermissionMixin from "../common-role-mixin/PermissionMixin";
+    import {swalMessage, swalTimer} from "../../../../vue-tools/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../vue-tools/swal/AxiosHelper";
 
     export default {
         name: "RoleUpdateForm",
-        mixins: [SwalMixin, StringHelperMixin, PermissionMixin],
+        mixins: [StringHelperMixin, PermissionMixin],
         components: {LoadingEclipse},
         data() {
             return {
@@ -91,7 +92,7 @@
 
             submitForm(){
                 if(!this.states.hasEdited && !this.$refs.form.validate()){
-                    this.swalMessage("error", "Please complete the form");
+                    swalMessage("error", "Please complete the form");
                     return
                 }
 
@@ -104,16 +105,11 @@
 
                 axios.patch(uri, this.inputData)
                     .then(function(response){
-                        this.swalTimer("success");
+                        swalTimer("success");
                         this.$emit("role-updated");
                         EventBus.$emit("table-reload-required")
                     }.bind(this))
-                    .catch(function (response) {
-                        let errors = response.response.data.error;
-                        if ((typeof errors) === "string")
-                            errors = {errors};
-                        this.swalMessage("error", errors)
-                    }.bind(this))
+                    .catch(axiosErrorCallback)
             },
         },
         mounted() {

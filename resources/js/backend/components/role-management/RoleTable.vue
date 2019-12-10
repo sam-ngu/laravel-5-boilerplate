@@ -118,7 +118,7 @@
                     @change="fetchRoles"
                     label="Items per page"
                     style="width: 150px;"
-                ></v-select>
+                />
             </div>
         </v-row>
 
@@ -127,15 +127,15 @@
 
 <script>
     import {EventBus} from "../../../vue-tools/event-bus";
-    import SwalMixin from "../../../mixins/SwalMixin";
     import StringHelperMixin from "../../../mixins/StringHelperMixin";
     import ButtonTooltip from "../../../vue-tools/ButtonTooltip";
-    import AxiosHelperMixin from "../../../mixins/AxiosHelperMixin";
+    import {swalLoader} from "../../../vue-tools/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../vue-tools/swal/AxiosHelper";
 
     export default {
         name: "RoleTable",
         components: {ButtonTooltip},
-        mixins: [AxiosHelperMixin, SwalMixin, StringHelperMixin],
+        mixins: [StringHelperMixin],
         data() {
             return {
                 states: {
@@ -165,7 +165,7 @@
         },
         methods: {
             deleteItem(item){
-                this.swalLoader();
+                swalLoader();
                 this.states.isLoading = true;
                 let uri = '/api/v1/roles/' + String(item.id);
                 axios.delete(uri)
@@ -175,11 +175,11 @@
                         this.reloadTable();
 
                     }.bind(this))
-                    .catch(this.axiosErrorCallback);
+                    .catch(axiosErrorCallback);
             },
             async fetchRoles(){
                 await this.$nextTick();
-                this.swalLoader();
+                swalLoader();
                 this.states.isLoading = true;
                 let uri;
                 uri = `/api/v1/roles?page=${this.apiMeta.current_page}&page_size=${this.pageSize}`;
@@ -193,7 +193,7 @@
                         this.apiMeta = response.data.meta;
 
                     }.bind(this))
-                    .catch(this.axiosErrorCallback);
+                    .catch(axiosErrorCallback);
             },
             isEmpty(array){
                 return _.isEmpty(array);

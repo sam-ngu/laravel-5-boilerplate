@@ -37,12 +37,12 @@
 <script>
     import ImageUploader from "../../../../../vue-tools/ImageUploader";
     import {MessageBus} from "../../../../../vue-tools/message-bus";
-    import SwalMixin from "../../../../../mixins/SwalMixin";
     import {EventBus} from "../../../../../vue-tools/event-bus";
+    import {swalConfirm, swalLoader, swalTimer} from "../../../../../vue-tools/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../../vue-tools/swal/AxiosHelper";
 
     export default {
         name: "ProfileUpdatePicture",
-        mixins: [SwalMixin],
         components: {ImageUploader},
         data() {
             return {
@@ -72,8 +72,8 @@
                 this.inputData.avatar_location = formData;
             },
             submit(){
-                this.swalConfirm("", () => {
-                    this.swalLoader();
+                swalConfirm("", () => {
+                    swalLoader()
 
                     // put everything to form data
                     let form = new FormData();
@@ -92,12 +92,12 @@
                         })
                         .then(function (response) {
                             EventBus.$emit('fetch-session-required');
-                            this.swalTimer('success', 500)
+                            swalTimer('success', 500)
                                 .then(function () {
                                     this.close()
                                 }.bind(this));
                         }.bind(this))
-                        .catch(this.axiosErrorCallback)
+                        .catch(axiosErrorCallback)
                     }
                 );
             }

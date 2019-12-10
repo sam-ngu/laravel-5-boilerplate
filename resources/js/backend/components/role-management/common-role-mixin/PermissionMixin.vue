@@ -1,4 +1,6 @@
 <script>
+    import {axiosErrorCallback} from "../../../../vue-tools/swal/AxiosHelper";
+
     export default {
         name: "PermissionMixin",
         data() {
@@ -22,17 +24,7 @@
                         this.states.isLoading = false;
                         // this.apiMeta = response.data.meta;
 
-                    }.bind(this)).catch(function (response) {
-                        console.log('Error: ' + response);
-
-                        let errors = response.response.data.error;
-                        if ((typeof errors) === "string")
-                            errors = {errors};
-                        swal.close();
-
-                        this.swalMessage("error", errors)
-
-                    }.bind(this));
+                    }.bind(this)).catch(axiosErrorCallback);
             }
         },
         mounted() {
