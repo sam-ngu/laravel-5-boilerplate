@@ -35,11 +35,11 @@
 
 </template>
 <script>
-    import ImageUploader from "../../../../../vue-tools/ImageUploader";
-    import {MessageBus} from "../../../../../vue-tools/message-bus";
-    import {EventBus} from "../../../../../vue-tools/event-bus";
-    import {swalConfirm, swalLoader, swalTimer} from "../../../../../vue-tools/swal/SwalHelper";
-    import {axiosErrorCallback} from "../../../../../vue-tools/swal/AxiosHelper";
+    import ImageUploader from "../../../../../utils/ImageUploader";
+    import {MessageBus} from "../../../../../utils/message-bus";
+    import {EventBus} from "../../../../../utils/event-bus";
+    import {swalConfirm, swalLoader, swalTimer} from "../../../../../utils/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../../utils/swal/AxiosHelper";
 
     export default {
         name: "ProfileUpdatePicture",

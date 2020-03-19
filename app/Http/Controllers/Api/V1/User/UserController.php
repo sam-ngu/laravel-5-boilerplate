@@ -33,29 +33,31 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request)
+    public function index(Request $request, \App\Repositories\Api\V1\UserRepository $repository)
     {
         $searchKeyword = (string)$request->search_keywords ?? null;
         $pageSize = (int)$request->page_size ?? 25;
-        $userStatus = (string)strtolower($request->status) ?? "active";
+//        $userStatus = (string)strtolower($request->status) ?? "active";
 
-        $isActive = $userStatus === 'active';
-        $isDeleted = $userStatus === 'deleted';
-        $isDeactivated = $userStatus === 'deactivated';
+//        $isActive = $userStatus === 'active';
+//        $isDeleted = $userStatus === 'deleted';
+//        $isDeactivated = $userStatus === 'deactivated';
 
         $users = (new UserRepository());
 
         if($searchKeyword){
-            $searchKeyword .= "%";
-            $users = $users->searchByName($searchKeyword, 'id', 'asc');
+            $users = $repository->search($searchKeyword);
+//            $users = $users->searchByName($searchKeyword, 'id', 'asc');
+        }else{
+            $users = $repository->buildQuery();
         }
 
-        if($isActive)
-            $users = $users->getActive(true, 'id', 'desc');
-        if ($isDeactivated)
-            $users = $users->getActive(false, 'id', 'desc');
-        if($isDeleted)
-            $users = $users->getDeleted('id', 'desc');
+//        if($isActive)
+//            $users = $users->getActive(true, 'id', 'desc');
+//        if ($isDeactivated)
+//            $users = $users->getActive(false, 'id', 'desc');
+//        if($isDeleted)
+//            $users = $users->getDeleted('id', 'desc');
 
         return UserResource::collection($users->paginate($pageSize))->response();
     }

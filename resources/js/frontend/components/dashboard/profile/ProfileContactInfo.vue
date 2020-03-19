@@ -43,7 +43,7 @@
 </template>
 
 <script>
-    import {MessageBus} from "../../../../vue-tools/message-bus";
+    import {MessageBus} from "../../../../utils/message-bus";
 
     export default {
         name: "ProfileContactInfo",

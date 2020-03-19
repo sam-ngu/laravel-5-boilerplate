@@ -36,11 +36,11 @@
 </template>
 
 <script>
-    import {MessageBus} from "../../../../vue-tools/message-bus";
-    import {EventBus} from "../../../../vue-tools/event-bus";
-    import ButtonTooltip from "../../../../vue-tools/ButtonTooltip";
-    import {swalConfirm, swalLoader, swalMessage} from "../../../../vue-tools/swal/SwalHelper";
-    import {axiosErrorCallback} from "../../../../vue-tools/swal/AxiosHelper";
+    import {MessageBus} from "../../../../utils/message-bus";
+    import {EventBus} from "../../../../utils/event-bus";
+    import ButtonTooltip from "../../../../utils/ButtonTooltip";
+    import {swalConfirm, swalLoader, swalMessage} from "../../../../utils/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../utils/swal/AxiosHelper";
 
     export default {
         name: "UserTableActions",

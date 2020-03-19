@@ -53,10 +53,10 @@
 </template>
 
 <script>
-    import {EventBus} from "../../../../../vue-tools/event-bus";
-    import {MessageBus} from "../../../../../vue-tools/message-bus";
+    import {EventBus} from "../../../../../utils/event-bus";
+    import {MessageBus} from "../../../../../utils/message-bus";
     import LoggedInItems from "./LoggedInItems";
-    import ViewportHelperMixin from "../../../../../mixins/ViewportHelperMixin";
+    import ViewportHelperMixin from "../../../../../utils/mixins/ViewportHelperMixin";
 
     export default {
         name: "navbar",

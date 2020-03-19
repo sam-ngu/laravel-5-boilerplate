@@ -11,8 +11,8 @@
 
 <script>
     import LayoutMaster from "./layout/Master";
-    import LoadingEclipse from "../../../vue-tools/LoadingEclipse";
-    import {MessageBus} from "../../../vue-tools/message-bus";
+    import LoadingEclipse from "../../../utils/LoadingEclipse";
+    import {MessageBus} from "../../../utils/message-bus";
 
     export default {
         name: 'frontend-dashboard',

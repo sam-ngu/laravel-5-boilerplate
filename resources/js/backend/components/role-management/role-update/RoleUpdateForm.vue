@@ -42,12 +42,12 @@
 </template>
 
 <script>
-    import {EventBus} from "../../../../vue-tools/event-bus";
-    import LoadingEclipse from "../../../../vue-tools/LoadingEclipse";
-    import StringHelperMixin from "../../../../mixins/StringHelperMixin";
+    import {EventBus} from "../../../../utils/event-bus";
+    import LoadingEclipse from "../../../../utils/LoadingEclipse";
+    import StringHelperMixin from "../../../../utils/mixins/StringHelperMixin";
     import PermissionMixin from "../common-role-mixin/PermissionMixin";
-    import {swalMessage, swalTimer} from "../../../../vue-tools/swal/SwalHelper";
-    import {axiosErrorCallback} from "../../../../vue-tools/swal/AxiosHelper";
+    import {swalMessage, swalTimer} from "../../../../utils/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../utils/swal/AxiosHelper";
 
     export default {
         name: "RoleUpdateForm",

@@ -21,8 +21,8 @@
 <script>
     import Navbar from "./navbar/NavBar";
     import BaseFooter from "./footer/BaseFooter";
-    import {MessageBus} from "../../../../vue-tools/message-bus";
-    import LoadingEclipse from "../../../../vue-tools/LoadingEclipse";
+    import {MessageBus} from "../../../../utils/message-bus";
+    import LoadingEclipse from "../../../../utils/LoadingEclipse";
     import BasePrivacyNotice from "./privacy-notice/BasePrivacyNotice";
 
     export default {

@@ -85,8 +85,8 @@
 </template>
 
 <script>
-    import {EventBus} from "../../../../vue-tools/event-bus";
-    import {MessageBus} from "../../../../vue-tools/message-bus";
+    import {EventBus} from "../../../../utils/event-bus";
+    import {MessageBus} from "../../../../utils/message-bus";
     import SidebarListTile from "./SidebarListTile";
 
     export default {

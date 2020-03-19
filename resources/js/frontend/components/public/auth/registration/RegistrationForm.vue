@@ -81,9 +81,9 @@
 </template>
 
 <script>
-    import {emailValidator} from "../../../../../vue-tools/ValidationHelper";
-    import {swalLoader, swalMessage} from "../../../../../vue-tools/swal/SwalHelper";
-    import {axiosErrorCallback} from "../../../../../vue-tools/swal/AxiosHelper";
+    import {emailValidator} from "../../../../../utils/ValidationHelper";
+    import {swalLoader, swalMessage} from "../../../../../utils/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../../utils/swal/AxiosHelper";
 
     export default {
         name: "RegistrationForm",

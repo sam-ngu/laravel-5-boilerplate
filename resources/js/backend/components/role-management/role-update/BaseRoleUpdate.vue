@@ -12,8 +12,8 @@
 </template>
 
 <script>
-    import CollapsibleSidebar from "../../../../vue-tools/CollapsibleSidebar";
-    import StringHelperMixin from "../../../../mixins/StringHelperMixin"
+    import CollapsibleSidebar from "../../../../utils/CollapsibleSidebar";
+    import StringHelperMixin from "../../../../utils/mixins/StringHelperMixin"
     import RoleUpdateForm from "./RoleUpdateForm";
 
     export default {

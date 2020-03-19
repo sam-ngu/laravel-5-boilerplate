@@ -18,6 +18,7 @@ Route::group([
      * All route names are prefixed with 'api.v1.'.
      */
 
+    include_route_files(__DIR__ . '/v1/');
 
     /*
      * Auth Routes

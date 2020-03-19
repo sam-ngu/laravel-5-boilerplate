@@ -19,7 +19,7 @@
 </template>
 
 <script>
-    import CollapsibleSidebar from "../../../../vue-tools/CollapsibleSidebar";
+    import CollapsibleSidebar from "../../../../utils/CollapsibleSidebar";
     import UserCreateForm from "./UserCreateForm";
     export default {
         name: "BaseUserCreate",

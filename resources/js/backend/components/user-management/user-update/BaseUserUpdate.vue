@@ -12,7 +12,7 @@
 </template>
 
 <script>
-    import CollapsibleSidebar from "../../../../vue-tools/CollapsibleSidebar";
+    import CollapsibleSidebar from "../../../../utils/CollapsibleSidebar";
     import UserUpdateForm from "./UserUpdateForm";
 
     export default {

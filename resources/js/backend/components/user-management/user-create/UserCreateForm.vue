@@ -102,10 +102,10 @@
 </template>
 
 <script>
-    import {EventBus} from "../../../../vue-tools/event-bus";
-    import {emailValidator} from "../../../../vue-tools/ValidationHelper";
-    import {swalMessage, swalTimer} from "../../../../vue-tools/swal/SwalHelper";
-    import {axiosErrorCallback} from "../../../../vue-tools/swal/AxiosHelper";
+    import {EventBus} from "../../../../utils/event-bus";
+    import {emailValidator} from "../../../../utils/ValidationHelper";
+    import {swalMessage, swalTimer} from "../../../../utils/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../utils/swal/AxiosHelper";
 
     export default {
         name: "UserCreateForm",

@@ -39,11 +39,11 @@
 </template>
 
 <script>
-    import {EventBus} from "../../../../vue-tools/event-bus";
+    import {EventBus} from "../../../../utils/event-bus";
     import PermissionMixin from "../common-role-mixin/PermissionMixin";
-    import StringHelperMixin from "../../../../mixins/StringHelperMixin";
-    import {swalMessage, swalTimer} from "../../../../vue-tools/swal/SwalHelper";
-    import {axiosErrorCallback} from "../../../../vue-tools/swal/AxiosHelper";
+    import StringHelperMixin from "../../../../utils/mixins/StringHelperMixin";
+    import {swalMessage, swalTimer} from "../../../../utils/swal/SwalHelper";
+    import {axiosErrorCallback} from "../../../../utils/swal/AxiosHelper";
 
     export default {
         name: "RoleCreateForm",

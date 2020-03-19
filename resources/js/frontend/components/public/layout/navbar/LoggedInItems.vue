@@ -87,9 +87,9 @@
 </template>
 
 <script>
-    import BaseAvatar from "../../../../../vue-tools/BaseAvatar";
-    import {MessageBus} from "../../../../../vue-tools/message-bus";
-    import ViewportHelperMixin from "../../../../../mixins/ViewportHelperMixin";
+    import BaseAvatar from "../../../../../utils/BaseAvatar";
+    import {MessageBus} from "../../../../../utils/message-bus";
+    import ViewportHelperMixin from "../../../../../utils/mixins/ViewportHelperMixin";
 
     export default {
         name: "LoggedInItems",

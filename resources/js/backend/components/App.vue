@@ -7,9 +7,9 @@
 
 <script>
     import LayoutMaster from "./layout/Master";
-    import {EventBus} from "../../vue-tools/event-bus";
-    import {MessageBus} from "../../vue-tools/message-bus";
-    import LoadingEclipse from "../../vue-tools/LoadingEclipse";
+    import {EventBus} from "../../utils/event-bus";
+    import {MessageBus} from "../../utils/message-bus";
+    import LoadingEclipse from "../../utils/LoadingEclipse";
 
     export default {
         name: 'app',

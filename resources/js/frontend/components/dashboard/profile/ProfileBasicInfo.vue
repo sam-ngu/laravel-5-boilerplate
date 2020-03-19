@@ -66,8 +66,8 @@
 </template>
 
 <script>
-    import {MessageBus} from "../../../../vue-tools/message-bus";
-    import BaseAvatar from "../../../../vue-tools/BaseAvatar";
+    import {MessageBus} from "../../../../utils/message-bus";
+    import BaseAvatar from "../../../../utils/BaseAvatar";
     import ProfileUpdatePicture from "./basic-info/ProfileUpdatePicture";
     export default {
         name: "ProfileBasicInfo",

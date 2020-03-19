@@ -48,7 +48,7 @@
 </template>
 
 <script>
-    import {EventBus} from "../../../vue-tools/event-bus";
+    import {EventBus} from "../../../utils/event-bus";
 
     export default {
         name: "navbar",

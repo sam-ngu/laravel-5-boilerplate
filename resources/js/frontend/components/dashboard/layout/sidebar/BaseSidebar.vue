@@ -20,7 +20,7 @@
 </template>
 
 <script>
-    import {EventBus} from "../../../../../vue-tools/event-bus";
+    import {EventBus} from "../../../../../utils/event-bus";
     import SidebarListTile from "./SidebarListTile";
 
     export default {

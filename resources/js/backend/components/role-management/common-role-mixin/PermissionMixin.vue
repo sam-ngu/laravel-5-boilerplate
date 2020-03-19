@@ -1,5 +1,5 @@
 <script>
-    import {axiosErrorCallback} from "../../../../vue-tools/swal/AxiosHelper";
+    import {axiosErrorCallback} from "../../../../utils/swal/AxiosHelper";
 
     export default {
         name: "PermissionMixin",

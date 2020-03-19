@@ -139,11 +139,11 @@
 </template>
 
 <script>
-    import {EventBus} from "../../../../vue-tools/event-bus";
-    import BaseAvatar from "../../../../vue-tools/BaseAvatar";
-    import {emailValidator} from "../../../../vue-tools/ValidationHelper";
-    import {axiosErrorCallback} from "../../../../vue-tools/swal/AxiosHelper";
-    import {swalTimer} from "../../../../vue-tools/swal/SwalHelper";
+    import {EventBus} from "../../../../utils/event-bus";
+    import BaseAvatar from "../../../../utils/BaseAvatar";
+    import {emailValidator} from "../../../../utils/ValidationHelper";
+    import {axiosErrorCallback} from "../../../../utils/swal/AxiosHelper";
+    import {swalTimer} from "../../../../utils/swal/SwalHelper";
 
     export default {
         name: "UserUpdateForm",

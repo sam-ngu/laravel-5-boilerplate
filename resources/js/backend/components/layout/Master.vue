@@ -21,10 +21,10 @@
 <script>
     import Sidebar from "./sidebar/BaseSidebar";
     import Navbar from "./NavBar";
-    import {EventBus} from "../../../vue-tools/event-bus";
-    import {MessageBus} from "../../../vue-tools/message-bus";
-    import LoggedInAsAlert from "../../../vue-tools/LoggedInAsAlert";
-    import LoadingEclipse from "../../../vue-tools/LoadingEclipse";
+    import {EventBus} from "../../../utils/event-bus";
+    import {MessageBus} from "../../../utils/message-bus";
+    import LoggedInAsAlert from "../../../utils/LoggedInAsAlert";
+    import LoadingEclipse from "../../../utils/LoadingEclipse";
 
 
     export default {

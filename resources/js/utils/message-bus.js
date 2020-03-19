@@ -1,6 +1,6 @@
 /* Get App params nad helper functions*/
 import Vue from 'vue'
-import SwalMixin from '../mixins/SwalMixin'
+import SwalMixin from './mixins/SwalMixin'
 
 export const MessageBus = new Vue({
     data(){

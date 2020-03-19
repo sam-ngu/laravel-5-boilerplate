@@ -16,8 +16,8 @@
 <script>
     import Sidebar from "./sidebar/BaseSidebar";
     import Navbar from "./NavBar";
-    import {EventBus} from "../../../../vue-tools/event-bus";
-    import LoggedInAsAlert from "../../../../vue-tools/LoggedInAsAlert";
+    import {EventBus} from "../../../../utils/event-bus";
+    import LoggedInAsAlert from "../../../../utils/LoggedInAsAlert";
 
 
     export default {
