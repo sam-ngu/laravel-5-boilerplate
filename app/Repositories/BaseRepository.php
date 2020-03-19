@@ -482,4 +482,9 @@ abstract class BaseRepository implements RepositoryContract
 
         return $this;
     }
+
+    public function query(callable $callback)
+    {
+        return $this->model->query($callback);
+    }
 }

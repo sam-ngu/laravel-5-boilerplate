@@ -318,15 +318,17 @@ class UserRepository extends BaseRepository
             throw new GeneralException(__('exceptions.backend.access.users.not_confirmed'));
         }
 
-        if ($user->id == 1) {
+        if ($user->id === auth()->id()) {
+            // Cant un-confirm self
+            throw new GeneralException(__('exceptions.backend.access.users.cant_unconfirm_self'));
+        }
+
+        if ($user->hasRole(config('access.users.admin_role'))) {
             // Cant un-confirm admin
             throw new GeneralException(__('exceptions.backend.access.users.cant_unconfirm_admin'));
         }
 
-        if ($user->id == auth()->id()) {
-            // Cant un-confirm self
-            throw new GeneralException(__('exceptions.backend.access.users.cant_unconfirm_self'));
-        }
+
 
         $user->confirmed = 0;
         $unconfirmed = $user->save();

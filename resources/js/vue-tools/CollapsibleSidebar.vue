@@ -9,8 +9,8 @@
             <!--</div>-->
 
             <!-- Sidebar Header -->
-            <div class="sidebar-header">
-                <h3 style="color: #1e3eb9">
+            <div class="sidebar-header" :class="classes.sidebarHeader">
+                <h3 class="font-weight-light title" :style="'color: ' + headerColor">
                     <slot name="header"></slot>
                 </h3>
             </div>
@@ -44,10 +44,25 @@
             width: {
                 type: String,
                 default: '80%'
+            },
+            color: {
+                type: String,
+                default: () => 'blue darken-2'
+            },
+            headerColor: {
+                type: String,
+                default: () => 'white'
             }
 
         },
         computed:{
+            classes(){
+                return {
+                    sidebarHeader: [
+                        this.color
+                    ]
+                }
+            },
             style(){
                 return {
                     sidebar: {
@@ -68,14 +83,14 @@
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
     /*
     DEMO STYLE
 */
     @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
-
+    /*$sidebarColor: "primary"*/
     body {
         font-family: 'Poppins', sans-serif;
         background: #FFFFFF;
