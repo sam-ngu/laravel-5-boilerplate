@@ -11,8 +11,8 @@
     "require": {
         "php": "^7.4",
         "appstract/laravel-blade-directives": "^0.4.4",
-        "arcanedev/log-viewer": "^5.0",
-        "arcanedev/no-captcha": "^10.0",
+        "arcanedev/log-viewer": "^7.0",
+        "arcanedev/no-captcha": "^11.0",
         "beyondcode/laravel-self-diagnosis": "^1.0",
         "creativeorange/gravatar": "~1.0",
         "davejamesmiller/laravel-breadcrumbs": "^5.0",
