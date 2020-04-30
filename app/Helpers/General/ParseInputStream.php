@@ -8,8 +8,9 @@
 
 namespace App\Helpers\General;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\UploadedFile as SymfonyFile;
 /**
  * stream - Handle raw input stream
  *
@@ -196,7 +197,7 @@ class ParseInputStream
             $path = sys_get_temp_dir() . '/php' . substr( sha1(rand()), 0, 6 );
             $bytes = file_put_contents( $path, $content );
             if ( $bytes !== FALSE ) {
-                $file = new UploadedFile( $path, $filename, $filetype, $bytes, UPLOAD_ERR_OK );
+                $file = UploadedFile::createFromBase(new SymfonyFile( $path, $filename, $filetype, $bytes, UPLOAD_ERR_OK ));
                 $result = array( $name => $file );
             }
         }
@@ -214,9 +215,9 @@ class ParseInputStream
         $data = [];
         if ( preg_match('/name=\"([^\"]*)\"[\n|\r]+([^\n\r].*)?\r$/s', $string, $match) ) {
             if (preg_match('/^(.*)\[\]$/i', $match[1], $tmp)) {
-                $data[$tmp[1]][] = ($match[2] !== NULL ? $match[2] : '');
+                $data[$tmp[1]][] = (data_get($match, '2') && $match[2] !== NULL ? $match[2] : '');
             } else {
-                $data[$match[1]] = ($match[2] !== NULL ? $match[2] : '');
+                $data[$match[1]] = (data_get($match, '2') && $match[2] !== NULL ? $match[2] : '');
             }
         }
         return $data;
