@@ -86,6 +86,10 @@ Route::group([
         /*User routes*/
         Route::apiResource('users', 'UserController');
 
+        // TODO: make this work
+//        Route::get('login-as', [\App\Http\Controllers\Backend\Auth\User\UserAccessController::class, 'loginAs'])->name('user.login-as');
+
+
         Route::group([
             'prefix' => 'users/{user}'
         ], function (){

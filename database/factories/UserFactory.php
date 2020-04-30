@@ -1,7 +1,6 @@
 <?php
 
 use Faker\Generator;
-use Webpatser\Uuid\Uuid;
 use App\Models\Auth\User;
 
 /*
@@ -17,7 +16,7 @@ use App\Models\Auth\User;
 
 $factory->define(User::class, function (Generator $faker) {
     return [
-        'uuid' 			    => Uuid::generate(4)->string,
+        'uuid' 			    => \Illuminate\Support\Str::uuid()->toString(),
         'first_name'        => $faker->firstName,
         'last_name'         => $faker->lastName,
         'email'             => $faker->safeEmail,

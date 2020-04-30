@@ -23,28 +23,13 @@ Route::group([
      */
     Route::group(['namespace' => 'User'], function () {
 
-        /*
-         * User Status'
-         */
-        Route::get('user/deactivated', [UserStatusController::class, 'getDeactivated'])->name('user.deactivated');
-        Route::get('user/deleted', [UserStatusController::class, 'getDeleted'])->name('user.deleted');
 
-        /*
-         * User CRUD
-         */
-        Route::get('user', [UserController::class, 'index'])->name('user.index');
-        Route::get('user/create', [UserController::class, 'create'])->name('user.create');
-        Route::post('user', [UserController::class, 'store'])->name('user.store');
 
         /*
          * Specific User
          */
         Route::group(['prefix' => 'user/{user}'], function () {
             // User
-            Route::get('/', [UserController::class, 'show'])->name('user.show');
-            Route::get('edit', [UserController::class, 'edit'])->name('user.edit');
-            Route::patch('/', [UserController::class, 'update'])->name('user.update');
-            Route::delete('/', [UserController::class, 'destroy'])->name('user.destroy');
 
             // Account
             Route::get('account/confirm/resend', [UserConfirmationController::class, 'sendConfirmationEmail'])->name('user.account.confirm.resend');
