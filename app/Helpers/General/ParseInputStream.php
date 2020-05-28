@@ -56,6 +56,12 @@ class ParseInputStream
             $blocks = $this->split($boundary);
             $data = $this->blocks($blocks);
         }
+        // convert to empty array string to empty array.
+        foreach ($data as $key => $value){
+            if($value === '[]'){
+                $data[$key] = [];
+            }
+        }
         return $data;
     }
     /**
@@ -215,9 +221,9 @@ class ParseInputStream
         $data = [];
         if ( preg_match('/name=\"([^\"]*)\"[\n|\r]+([^\n\r].*)?\r$/s', $string, $match) ) {
             if (preg_match('/^(.*)\[\]$/i', $match[1], $tmp)) {
-                $data[$tmp[1]][] = (data_get($match, '2') && $match[2] !== NULL ? $match[2] : '');
+                $data[$tmp[1]][] = (data_get($match, '2') !== null && $match[2] !== NULL ? $match[2] : '');
             } else {
-                $data[$match[1]] = (data_get($match, '2') && $match[2] !== NULL ? $match[2] : '');
+                $data[$match[1]] = (data_get($match, '2') !== null && $match[2] !== NULL ? $match[2] : '');
             }
         }
         return $data;

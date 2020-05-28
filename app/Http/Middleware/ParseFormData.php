@@ -16,8 +16,29 @@ class ParseFormData
      */
     public function handle($request, Closure $next)
     {
-        if ($request->method() == 'POST' OR $request->method() == 'GET') {
+//        if ($request->method() == 'POST' OR $request->method() == 'GET') {
+//            return $next($request);
+//        }
+
+        if($request->method() === 'GET'){
             return $next($request);
+        }
+        if ($request->method() === 'POST') {
+            if($request->isJson()){
+                return $next($request);
+            }
+            // potential form data
+            $data = $request->toArray();
+
+            // convert to empty array string to empty array.
+            foreach ($data as $key => $value){
+                if($value === '[]'){
+                    $data[$key] = [];
+                }
+            }
+            $request->request->add($data);
+            return $next($request);
+
         }
 
         if (preg_match('/multipart\/form-data/', $request->headers->get('Content-Type')) or
